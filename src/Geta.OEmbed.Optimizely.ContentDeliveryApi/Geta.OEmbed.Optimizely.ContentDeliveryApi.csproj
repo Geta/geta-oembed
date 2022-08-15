@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net6.0;net5.0</TargetFrameworks>
+		<LangVersion>10</LangVersion>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
+		<PackageReference Include="EPiServer.ContentDeliveryApi.Core" Version="[3.0.0, 4.0.0)" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+		<PackageReference Include="EPiServer.ContentDeliveryApi.Core" Version="[3.3.0, 4.0.0)" />
+	</ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Geta.OEmbed.Optimizely\Geta.OEmbed.Optimizely.csproj" />
+    </ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="$(AssemblyName).Tests" />
+	</ItemGroup>
+
+</Project>

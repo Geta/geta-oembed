@@ -1,0 +1,12 @@
+@using Foundation.Features.Blocks.OEmbedBlock
+
+@model IBlockViewModel<OEmbedBlock>
+
+<div style="background-color: @Model.CurrentBlock.BackgroundColor; opacity:@Model.CurrentBlock.BlockOpacity;" class="@(Model.CurrentBlock.Padding + " " + Model.CurrentBlock.Margin)">
+    @if (Model.CurrentBlock.HasVideo)
+    {
+        <div class="oembed-container" style='padding-bottom:@Model.CurrentBlock.InverseAspect'>
+            @Html.Raw(Model.CurrentBlock.Video.Html)
+        </div>
+    }
+</div>

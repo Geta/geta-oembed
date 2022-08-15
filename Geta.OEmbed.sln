@@ -1,0 +1,92 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.OEmbed", "src\Geta.OEmbed\Geta.OEmbed.csproj", "{C36C2D17-986B-4F72-A615-6EAE32AE3D5A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.OEmbed.Optimizely", "src\Geta.OEmbed.Optimizely\Geta.OEmbed.Optimizely.csproj", "{1F0FB51C-04CE-4746-BCFD-84617BB155BF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.OEmbed.Optimizely.ContentDeliveryApi", "src\Geta.OEmbed.Optimizely.ContentDeliveryApi\Geta.OEmbed.Optimizely.ContentDeliveryApi.csproj", "{1B43DA86-2585-4A8B-AA62-7960E3DDA998}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.OEmbed.AspNetCore.Mvc", "src\Geta.OEmbed.AspNetCore.Mvc\Geta.OEmbed.AspNetCore.Mvc.csproj", "{B9C9FAF8-C1DB-45F2-B6F8-F9454E84222E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{DFD0FE65-2A74-463E-9352-AF753AD90D21}"
+	ProjectSection(SolutionItems) = preProject
+		CHANGELOG.md = CHANGELOG.md
+		src\pack.proj = src\pack.proj
+		pack.ps1 = pack.ps1
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sandbox", "Sandbox", "{CB45EE31-26B2-4303-BB7C-3A6F93891617}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foundation", "sandbox\Foundation\Foundation.csproj", "{BDC7A04B-D594-41AA-B149-1249509E589A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{96C6141F-2CD5-4953-9A9A-15BF927FFF85}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.OEmbed.Tests", "tests\Geta.OEmbed.Tests\Geta.OEmbed.Tests.csproj", "{CBCA75A2-E6C8-42F9-9185-AE579490B8FA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.OEmbed.Optimizely.Tests", "tests\Geta.OEmbed.Optimizely.Tests\Geta.OEmbed.Optimizely.Tests.csproj", "{E5F4B8BB-3B45-4356-9F27-506B03891E8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geta.OEmbed.Tests.Common", "tests\Geta.OEmbed.Tests.Common\Geta.OEmbed.Tests.Common.csproj", "{CE3226F2-D0E5-41D6-9475-E84812F3C295}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geta.OEmbed.Optimizely.Tests.Common", "tests\Geta.OEmbed.Optimizely.Tests.Common\Geta.OEmbed.Optimizely.Tests.Common.csproj", "{7AB33ECE-A9B8-4D06-91DB-C23BBC228DFC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C36C2D17-986B-4F72-A615-6EAE32AE3D5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C36C2D17-986B-4F72-A615-6EAE32AE3D5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C36C2D17-986B-4F72-A615-6EAE32AE3D5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C36C2D17-986B-4F72-A615-6EAE32AE3D5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F0FB51C-04CE-4746-BCFD-84617BB155BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F0FB51C-04CE-4746-BCFD-84617BB155BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F0FB51C-04CE-4746-BCFD-84617BB155BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F0FB51C-04CE-4746-BCFD-84617BB155BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B43DA86-2585-4A8B-AA62-7960E3DDA998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B43DA86-2585-4A8B-AA62-7960E3DDA998}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B43DA86-2585-4A8B-AA62-7960E3DDA998}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B43DA86-2585-4A8B-AA62-7960E3DDA998}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9C9FAF8-C1DB-45F2-B6F8-F9454E84222E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9C9FAF8-C1DB-45F2-B6F8-F9454E84222E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9C9FAF8-C1DB-45F2-B6F8-F9454E84222E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9C9FAF8-C1DB-45F2-B6F8-F9454E84222E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDC7A04B-D594-41AA-B149-1249509E589A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDC7A04B-D594-41AA-B149-1249509E589A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDC7A04B-D594-41AA-B149-1249509E589A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDC7A04B-D594-41AA-B149-1249509E589A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBCA75A2-E6C8-42F9-9185-AE579490B8FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBCA75A2-E6C8-42F9-9185-AE579490B8FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBCA75A2-E6C8-42F9-9185-AE579490B8FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBCA75A2-E6C8-42F9-9185-AE579490B8FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5F4B8BB-3B45-4356-9F27-506B03891E8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5F4B8BB-3B45-4356-9F27-506B03891E8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5F4B8BB-3B45-4356-9F27-506B03891E8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5F4B8BB-3B45-4356-9F27-506B03891E8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE3226F2-D0E5-41D6-9475-E84812F3C295}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE3226F2-D0E5-41D6-9475-E84812F3C295}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE3226F2-D0E5-41D6-9475-E84812F3C295}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE3226F2-D0E5-41D6-9475-E84812F3C295}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AB33ECE-A9B8-4D06-91DB-C23BBC228DFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AB33ECE-A9B8-4D06-91DB-C23BBC228DFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AB33ECE-A9B8-4D06-91DB-C23BBC228DFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AB33ECE-A9B8-4D06-91DB-C23BBC228DFC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BDC7A04B-D594-41AA-B149-1249509E589A} = {CB45EE31-26B2-4303-BB7C-3A6F93891617}
+		{CBCA75A2-E6C8-42F9-9185-AE579490B8FA} = {96C6141F-2CD5-4953-9A9A-15BF927FFF85}
+		{E5F4B8BB-3B45-4356-9F27-506B03891E8A} = {96C6141F-2CD5-4953-9A9A-15BF927FFF85}
+		{CE3226F2-D0E5-41D6-9475-E84812F3C295} = {96C6141F-2CD5-4953-9A9A-15BF927FFF85}
+		{7AB33ECE-A9B8-4D06-91DB-C23BBC228DFC} = {96C6141F-2CD5-4953-9A9A-15BF927FFF85}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {39C04A54-296E-43DE-9AD1-6F8ED2B5C61E}
+	EndGlobalSection
+EndGlobal

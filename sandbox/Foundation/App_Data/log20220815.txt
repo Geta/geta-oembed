@@ -1,0 +1,7 @@
+2022-08-15 13:09:46.077 +00:00 [WRN] Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+2022-08-15 13:09:46.196 +00:00 [WRN] No XML encryptor configured. Key {adad49d7-688f-4eae-902a-954b3e0345b2} may be persisted to storage in unencrypted form.
+2022-08-15 13:09:49.094 +00:00 [WRN] The modules finder couldn't find a directory at '~/EPiServer/Episerver.Marketing.Connector.Forms'
+2022-08-15 13:09:49.101 +00:00 [WRN] The modules finder couldn't find a directory at '/EPiServer/Episerver.Marketing.Connector.Forms'
+2022-08-15 13:09:52.687 +00:00 [WRN] The Find indexing job is unfinished. We might get unexpected exception.
+2022-08-15 13:09:59.140 +00:00 [WRN] The modules finder couldn't find a directory at '~/EPiServer/Episerver.Marketing.Connector.Forms'
+2022-08-15 13:09:59.149 +00:00 [WRN] The modules finder couldn't find a directory at '/EPiServer/Episerver.Marketing.Connector.Forms'
