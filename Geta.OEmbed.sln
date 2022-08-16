@@ -13,6 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.OEmbed.AspNetCore.Mvc"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{DFD0FE65-2A74-463E-9352-AF753AD90D21}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		CHANGELOG.md = CHANGELOG.md
 		src\pack.proj = src\pack.proj
 		pack.ps1 = pack.ps1
@@ -29,9 +30,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.OEmbed.Tests", "tests\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.OEmbed.Optimizely.Tests", "tests\Geta.OEmbed.Optimizely.Tests\Geta.OEmbed.Optimizely.Tests.csproj", "{E5F4B8BB-3B45-4356-9F27-506B03891E8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geta.OEmbed.Tests.Common", "tests\Geta.OEmbed.Tests.Common\Geta.OEmbed.Tests.Common.csproj", "{CE3226F2-D0E5-41D6-9475-E84812F3C295}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.OEmbed.Tests.Common", "tests\Geta.OEmbed.Tests.Common\Geta.OEmbed.Tests.Common.csproj", "{CE3226F2-D0E5-41D6-9475-E84812F3C295}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geta.OEmbed.Optimizely.Tests.Common", "tests\Geta.OEmbed.Optimizely.Tests.Common\Geta.OEmbed.Optimizely.Tests.Common.csproj", "{7AB33ECE-A9B8-4D06-91DB-C23BBC228DFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.OEmbed.Optimizely.Tests.Common", "tests\Geta.OEmbed.Optimizely.Tests.Common\Geta.OEmbed.Optimizely.Tests.Common.csproj", "{7AB33ECE-A9B8-4D06-91DB-C23BBC228DFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

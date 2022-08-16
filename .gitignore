@@ -1,5 +1,5 @@
 **/modules
-!sandbox/**/modules/_protected/Geta.Optimizely.GenericLinks
+!sandbox/**/modules/_protected/Geta.OEmbed.Optimizely
 
 .npm-cache/
 
