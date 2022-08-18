@@ -27,6 +27,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ### Documentation
 
+- [Extending service behavior](./docs/extension-points.md)
 - [Adding support for Optimizely](./docs/optimizely.md)
 
 ## Package maintainer
