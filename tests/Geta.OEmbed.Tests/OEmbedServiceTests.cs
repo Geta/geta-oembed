@@ -70,9 +70,13 @@ namespace Geta.OEmbed.Tests
 
         private OEmbedService CreateService()
         {
-            var manifestLoader = new HttpClientManifestLoader(_providerClientFactory);
+            var config = new OEmbedConfiguration();
+            var manifestLoader = new HttpClientManifestLoader(config, _providerClientFactory.CreateClient());
             var repository = new OEmbedProviderRepository(manifestLoader);
-            return new OEmbedService(repository, _endpointClientFactory);
+            var urlBuilders = new[] { new DefaultProviderUrlBuilder() };
+            var embedFormatters = Enumerable.Empty<IProviderResponseFormatter>();
+            
+            return new OEmbedService(repository, urlBuilders, embedFormatters, _endpointClientFactory.CreateClient());
         }
 
         private static MockHttpClientFactory CreateHttpClientFactory(Func<MockHttpMessageHandler> handlerFactory)

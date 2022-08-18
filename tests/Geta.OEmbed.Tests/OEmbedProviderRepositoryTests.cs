@@ -76,7 +76,8 @@ namespace Geta.OEmbed.Tests
 
         private static OEmbedProviderRepository CreateRepository(IHttpClientFactory httpClientFactory)
         {
-            var manifestLoader = new HttpClientManifestLoader(httpClientFactory);
+            var config = new OEmbedConfiguration();
+            var manifestLoader = new HttpClientManifestLoader(config, httpClientFactory.CreateClient());
             return new OEmbedProviderRepository(manifestLoader);
         }
 

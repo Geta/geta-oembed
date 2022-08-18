@@ -8,18 +8,18 @@ namespace Geta.OEmbed.Providers
 {
     public class HttpClientManifestLoader : IProviderManifestLoader
     {
-        private readonly IHttpClientFactory _clientFactory;
-
-        public HttpClientManifestLoader(IHttpClientFactory clientFactory)
+        private readonly OEmbedConfiguration _configuration;
+        private readonly HttpClient _httpClient;
+        
+        public HttpClientManifestLoader(OEmbedConfiguration configuration, HttpClient httpClient)
         {
-            _clientFactory = clientFactory;
+            _configuration = configuration;
+            _httpClient = httpClient;
         }
 
         public virtual async Task<IEnumerable<IOEmbedProvider>> GetEmbedProvidersAsync(CancellationToken cancellationToken)
         {
-            using var client = _clientFactory.CreateClient();
-
-            var response = await client.GetAsync("https://oembed.com/providers.json", cancellationToken);
+            var response = await _httpClient.GetAsync(_configuration.ProviderManifestUrl, cancellationToken);
 
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStreamAsync(cancellationToken);

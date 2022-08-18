@@ -39,7 +39,7 @@ namespace Geta.OEmbed.Optimizely.Tests.Common.Repositories
 
         public void Save(SiteDefinition siteDefinition)
         {
-            
+            // This method needs no implementation as all definitions are held in memory.
         }
     }
 }

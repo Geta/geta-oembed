@@ -115,16 +115,6 @@ define([
 
                 const container = domConstruct.create("div", { class: "geta-oembed__flex" });
                 domConstruct.place(container, this._settings);
-
-                this.maxWidth = new NumberTextBox({ label: "Max width", placeHolder: "Max width", class: "geta-oembed__input"});
-                this.maxWidth.placeAt(container);
-                this.connect(this.maxWidth, "onChange", "_onSettingsChange");
-                this.maxWidth.startup();
-
-                this.maxHeight = new NumberTextBox({ label: "Max height", placeHolder: "Max height", class: "geta-oembed__input"});
-                this.maxHeight.placeAt(container);
-                this.connect(this.maxHeight, "onChange", "_onSettingsChange");
-                this.maxHeight.startup();
             },
 
             _equals: function (val1, val2) {
@@ -141,9 +131,7 @@ define([
                     val1.autoplay === val2.autoplay &&
                     val1.enableControls === val2.enableControls &&
                     val1.loop === val2.loop &&
-                    val1.muted === val2.muted &&
-                    val1.maxWidth === val2.maxWidth &&
-                    val1.maxHeight === val2.maxHeight;
+                    val1.muted === val2.muted;
             },
 
             _getNumberValueOrNull: function(widget) {
@@ -186,17 +174,13 @@ define([
                 const controls = this.controls.get("checked");
                 const loop = this.loop.get("checked");
                 const muted = this.muted.get("checked");
-                const maxWidth = this._getNumberValueOrNull(this.maxWidth);
-                const maxHeight = this._getNumberValueOrNull(this.maxHeight);
 
                 const newValue = {
                     requestedUrl: oembedUrl,
                     autoplay,
                     enableControls: controls,
                     loop,
-                    muted,
-                    maxWidth,
-                    maxHeight,
+                    muted
                 };
 
                 if (this._equals(this.value, newValue)) {
@@ -205,22 +189,12 @@ define([
 
                 let requestUrl = this.endpointRoute + "?url=" + encodeURIComponent(oembedUrl) + "&autoplay=" + autoplay + "&controls=" + controls + "&loop=" + loop + "&muted=" + muted;
 
-                if (maxWidth !== null) {
-                    requestUrl += "&maxwidth=" + maxWidth;
-                }
-
-                if (maxHeight !== null) {
-                    requestUrl += "&maxheight=" + maxHeight;
-                }
-
                 this.oEmbedPromise = xhr(requestUrl, { handleAs: "json" }).then((data) => {
                     data.requestedUrl = oembedUrl;
                     data.autoplay = autoplay;
                     data.enableControls = controls;
                     data.loop = loop;
                     data.muted = muted;
-                    data.maxWidth = maxWidth;
-                    data.maxHeight = maxHeight;
                     this._updateValue(data);
                 });
             },
@@ -266,19 +240,12 @@ define([
                     this._updateSettingIfChanged(this.controls, true);
                     this._updateSettingIfChanged(this.loop, false);
                     this._updateSettingIfChanged(this.muted, true);
-                    this._updateValueIfChanged(this.maxWidth, NaN);
-                    this._updateValueIfChanged(this.maxHeight, NaN);
                 } else {
                     this._updateSettingIfChanged(this.autoPlay, value.autoplay);
                     this._updateSettingIfChanged(this.controls, value.enableControls);
                     this._updateSettingIfChanged(this.loop, value.loop);
                     this._updateSettingIfChanged(this.muted, value.muted);
-                    this._updateValueIfChanged(this.maxWidth, value.maxWidth);
-                    this._updateValueIfChanged(this.maxHeight, value.maxHeight);
                 }
-
-                this.maxWidth.set("readOnly", !value && !value.requestedUrl);
-                this.maxHeight.set("readOnly", !value && !value.requestedUrl);
             },
 
             _updateSettingIfChanged: function(widget, checked) {

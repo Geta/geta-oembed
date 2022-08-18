@@ -6,7 +6,7 @@
         {
             var query = string.Join("&amp;", parameters.Select(o => $"{o.Key}={o.Value}"));
 
-            return url.IndexOf("?", StringComparison.Ordinal) > 0
+            return url.IndexOf("?", StringComparison.Ordinal) > -1
                 ? $"{url}&{query}"
                 : $"{url}?{query}";
         }

@@ -3,23 +3,24 @@
 
 using System.Net.Http.Headers;
 using System.Text.Json;
-using System.Text.RegularExpressions;
-using System.Web;
-using Geta.OEmbed.Extensions;
 using Geta.OEmbed.Models;
+using Geta.OEmbed.Providers;
 
 namespace Geta.OEmbed
 {
     public class OEmbedService : IOEmbedService
     {
-        private static readonly Regex _srcFilter = new("src=\"([a-z-0-9-_?=/:.]{1,})\"", RegexOptions.IgnoreCase | RegexOptions.Compiled);
         private readonly IOEmbedProviderRepository _oEmbedProviderRepository;
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IEnumerable<IProviderUrlBuilder> _providerUrlBuilders;
+        private readonly IEnumerable<IProviderResponseFormatter> _embedFormatters;
+        private readonly HttpClient _httpClient;
 
-        public OEmbedService(IOEmbedProviderRepository oEmbedProviderRepository, IHttpClientFactory httpClientFactory)
+        public OEmbedService(IOEmbedProviderRepository oEmbedProviderRepository, IEnumerable<IProviderUrlBuilder> providerUrlBuilders, IEnumerable<IProviderResponseFormatter> responseFormatters, HttpClient httpClient)
         {
             _oEmbedProviderRepository = oEmbedProviderRepository;
-            _httpClientFactory = httpClientFactory;
+            _providerUrlBuilders = providerUrlBuilders;
+            _embedFormatters = responseFormatters;
+            _httpClient = httpClient;
         }
 
         public virtual async Task<OEmbedResponse?> GetAsync(string url)
@@ -45,8 +46,8 @@ namespace Geta.OEmbed
                 return null;
             }
 
-            var parameters = string.Join("&", CreateParameters(options).Select(o => $"{o.Key}={o.Value}"));
-            var oEmbedUrl = $"{provider.GetOEmbedUrl()}?url={HttpUtility.UrlEncode(url)}&{parameters}";
+            var providerUrlBuilder = GetProviderUrlBuilder(provider);
+            var oEmbedUrl = providerUrlBuilder.Build(url, provider, options);
 
             var request = new HttpRequestMessage(HttpMethod.Get, oEmbedUrl)
             {
@@ -56,82 +57,40 @@ namespace Geta.OEmbed
                 }
             };
 
-            using var client = _httpClientFactory.CreateClient();
-            var response = await client.SendAsync(request, cancellationToken);
+            var response = await _httpClient.SendAsync(request, cancellationToken);
             
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStreamAsync(cancellationToken);
             var oEmbedEntry = await JsonSerializer.DeserializeAsync<OEmbedResponse>(content, cancellationToken: cancellationToken);
+
             if (oEmbedEntry is not null)
-                ParseVideoUrl(oEmbedEntry, options);
+            {
+                oEmbedEntry = FormatResponse(provider, oEmbedEntry, options);
+            }
 
             return oEmbedEntry;
         }
 
-        protected virtual void ParseVideoUrl(OEmbedResponse oEmbedResponse, OEmbedOptions options)
+        protected virtual OEmbedResponse FormatResponse(IOEmbedProvider embedProvider, OEmbedResponse oEmbedResponse, OEmbedOptions options)
         {
-            if (oEmbedResponse.Type != "video")
+            var formatter = GetProviderResponseFormatter(embedProvider, oEmbedResponse);
+            if (formatter is null)
             {
-                return;
+                return oEmbedResponse;
             }
 
-            var match = _srcFilter.Match(oEmbedResponse.Html);
-            if (!match.Success)
-            {
-                return;
-            }
-
-            var originalUrl = match.Groups[1].Value;
-            var parameters = CreateReplacementParameters(options);
-            var urlWithOptions = originalUrl.AddParameters(parameters);
-
-            oEmbedResponse.Html = oEmbedResponse.Html.Replace(originalUrl, urlWithOptions);
+            return formatter.FormatResponse(oEmbedResponse, options);
         }
 
-        protected virtual IDictionary<string, string> CreateReplacementParameters(OEmbedOptions options)
+        protected virtual IProviderUrlBuilder GetProviderUrlBuilder(IOEmbedProvider embedProvider)
         {
-            return new Dictionary<string, string>
-            {
-                { nameof(OEmbedOptions.Autoplay).ToLower(), options.Autoplay ? "1" : "0" },
-                { nameof(OEmbedOptions.Controls).ToLower(), options.Controls ? "1" : "0" },
-                { nameof(OEmbedOptions.Loop).ToLower(), options.Loop ? "1" : "0" },
-                { nameof(OEmbedOptions.Muted).ToLower(), options.Muted ? "1" : "0" },
-                { "mute", options.Muted ? "1" : "0" },
-            };
+            return _providerUrlBuilders.First(x => x.CanBuild(embedProvider));
         }
 
-        protected virtual IDictionary<string, string> CreateParameters(OEmbedOptions options)
+        protected virtual IProviderResponseFormatter? GetProviderResponseFormatter(IOEmbedProvider embedProvider, OEmbedResponse oEmbedResponse)
         {
-            var parameters = new Dictionary<string, string>
-            {
-                { nameof(OEmbedOptions.Autoplay).ToLower(), options.Autoplay.ToString().ToLower() },
-                { nameof(OEmbedOptions.Controls).ToLower(), options.Controls.ToString().ToLower() },
-                { nameof(OEmbedOptions.Loop).ToLower(), options.Loop.ToString().ToLower() },
-                { nameof(OEmbedOptions.Muted).ToLower(), options.Muted.ToString().ToLower() },
-            };
-
-            if (options.Width.HasValue)
-            {
-                parameters.Add(nameof(OEmbedOptions.Width).ToLower(), options.Width.Value.ToString());
-            }
-
-            if (options.Height.HasValue)
-            {
-                parameters.Add(nameof(OEmbedOptions.Height).ToLower(), options.Height.Value.ToString());
-            }
-
-            if (options.MaxWidth.HasValue)
-            {
-                parameters.Add(nameof(OEmbedOptions.MaxWidth).ToLower(), options.MaxWidth.Value.ToString());
-            }
-
-            if (options.MaxHeight.HasValue)
-            {
-                parameters.Add(nameof(OEmbedOptions.MaxHeight).ToLower(), options.MaxHeight.Value.ToString());
-            }
-
-            return parameters;
+            return _embedFormatters.FirstOrDefault(x => x.CanFormat(embedProvider, oEmbedResponse));
         }
     }
 }

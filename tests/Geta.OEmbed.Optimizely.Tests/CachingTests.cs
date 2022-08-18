@@ -29,7 +29,8 @@ namespace Geta.OEmbed.Optimizely.Tests
             var instanceCache = _instanceCache = new MemoryInstanceCache();
             var syncronizedCache = new FakeSynchronizedObjectInstanceCache(instanceCache);
 
-            var manifestLoader = new HttpClientManifestLoader(providerClientFactory);
+            var config = new OEmbedConfiguration();
+            var manifestLoader = new HttpClientManifestLoader(config, providerClientFactory.CreateClient());
 
             var siteDefinitionRepository = new MemorySiteDefinitionRepository(new [] { SiteDefinition.Empty });
             var oembedProvider = new OptimizelyOEmbedProvider(siteDefinitionRepository, Options.Create(new UIOptions()));
@@ -37,7 +38,10 @@ namespace Geta.OEmbed.Optimizely.Tests
             var baseRepository = new OEmbedProviderRepository(manifestLoader);
             var cachedRepository = new CachedOEmbedProviderRepository(baseRepository, syncronizedCache, oembedProvider);
 
-            var baseEmbedService = new OEmbedService(cachedRepository, endpointClientFactory);
+            var urlBuilders = new[] { new DefaultProviderUrlBuilder() };
+            var embedFormatters = Enumerable.Empty<IProviderResponseFormatter>();
+
+            var baseEmbedService = new OEmbedService(cachedRepository, urlBuilders, embedFormatters, endpointClientFactory.CreateClient());
             var cachedEmbedService = new CachedOEmbedService(baseEmbedService, syncronizedCache);
 
             serviceCollection.AddSingleton<IObjectInstanceCache>(instanceCache);

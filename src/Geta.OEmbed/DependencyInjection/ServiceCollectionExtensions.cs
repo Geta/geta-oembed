@@ -9,9 +9,22 @@ namespace Geta.OEmbed.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddGetaOEmbed(this IServiceCollection services)
+        public static IServiceCollection AddGetaOEmbed(this IServiceCollection services, Action<OEmbedConfiguration>? configure = null)
         {
-            services.AddHttpClient();
+            var configuration = new OEmbedConfiguration();
+
+            if (configure is not null)
+                configure(configuration);
+
+            services.TryAddSingleton(configuration);
+            services.TryAddEnumerable(new ServiceDescriptor(typeof(IProviderUrlBuilder), typeof(DefaultProviderUrlBuilder), ServiceLifetime.Singleton));
+            services.TryAddEnumerable(new ServiceDescriptor(typeof(IProviderResponseFormatter), typeof(YouTubeVideoResponseFormatter), ServiceLifetime.Singleton));
+
+            services.AddHttpClient<HttpClientManifestLoader>();
+            services.AddHttpClient<OEmbedService>();
+            services.AddHttpClient<IProviderManifestLoader, HttpClientManifestLoader>();
+            services.AddHttpClient<IOEmbedService, OEmbedService>();
+
             services.TryAddSingleton<HttpClientManifestLoader>();
             services.TryAddSingleton<OEmbedProviderRepository>();
             services.TryAddSingleton<OEmbedService>();

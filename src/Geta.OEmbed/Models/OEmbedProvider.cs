@@ -15,15 +15,6 @@ namespace Geta.OEmbed.Models
 
         [JsonPropertyName("endpoints")]
         public virtual List<OEmbedEndpoint> Endpoints { get; set; } = new List<OEmbedEndpoint>();
-
-        public virtual string GetOEmbedUrl()
-        {
-            return FormatEndpointUrl(Endpoints.First().Url);
-        }
-        
-        protected virtual string FormatEndpointUrl(string url)
-        {
-            return url.Replace("{format}", "json");
-        }
+       
     }
 }

@@ -1,5 +1,6 @@
 **/modules
 !sandbox/**/modules/_protected/Geta.OEmbed.Optimizely
+sandbox/**/App_Data/log*.txt
 
 .npm-cache/
 

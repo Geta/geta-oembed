@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Geta Digital. All rights reserved.
 // Licensed under Apache-2.0. See the LICENSE file in the project root for more information
 
+using Castle.Components.DictionaryAdapter;
 using EPiServer.Framework.Cache;
 
 namespace Geta.OEmbed.Tests.Common.Caching
@@ -14,37 +15,37 @@ namespace Geta.OEmbed.Tests.Common.Caching
             _objectInstanceCache = objectInstanceCache;
         }
 
-        public FailureRecoveryAction SynchronizationFailedStrategy { get; set; }
+        public virtual FailureRecoveryAction SynchronizationFailedStrategy { get; set; }
 
-        public IObjectInstanceCache ObjectInstanceCache => _objectInstanceCache;
+        public virtual IObjectInstanceCache ObjectInstanceCache => _objectInstanceCache;
 
-        [Obsolete]
-        public void Clear()
+        [Obsolete("Method is no longer supported. HttpRuntimeCache can be clearad by iterating over all keys and remove each item")]
+        public virtual void Clear()
         {
             _objectInstanceCache.Clear();
         }
 
-        public object? Get(string key)
+        public virtual object? Get(string key)
         {
             return _objectInstanceCache.Get(key);
         }
 
-        public void Insert(string key, object value, CacheEvictionPolicy evictionPolicy)
+        public virtual void Insert(string key, object value, CacheEvictionPolicy evictionPolicy)
         {
             _objectInstanceCache.Insert(key, value, evictionPolicy);
         }
 
-        public void Remove(string key)
+        public virtual void Remove(string key)
         {
             _objectInstanceCache.Remove(key);
         }
 
-        public void RemoveLocal(string key)
+        public virtual void RemoveLocal(string key)
         {
             _objectInstanceCache.Remove(key);
         }
 
-        public void RemoveRemote(string key)
+        public virtual void RemoveRemote(string key)
         {
             _objectInstanceCache.Remove(key);
         }

@@ -27,7 +27,24 @@ namespace Geta.OEmbed.Optimizely.Handlers
             }
 
             var (width, height) = await GetDimensionsAsync(content, cancellationToken);
-            var videoAttributes = new Dictionary<string, string>();
+            var videoAttributes = FormatVideoAttributes(request);
+            var friendlyUrl = _urlResolver.GetUrl(request.Url);
+
+            var oEmbedEntry = new OEmbedResponse
+            {
+                Type = content is IContentVideo ? "video" : "image",
+                Title = content.Title ?? content.Name,
+                Width = width,
+                Height = height,
+                Html = @$"<video width=""{width}"" height=""{height}"" {videoAttributes}><source src=""{friendlyUrl}""></video>",
+            };
+
+            return oEmbedEntry;
+        }
+
+        protected virtual string FormatVideoAttributes(OEmbedRequest request)
+        {
+            var videoAttributes = new Dictionary<string, string>(4);
 
             if (request.Autoplay)
             {
@@ -49,18 +66,9 @@ namespace Geta.OEmbed.Optimizely.Handlers
                 videoAttributes.Add("muted", "");
             }
 
-            var friendlyUrl = _urlResolver.GetUrl(request.Url);
+            var attributes = videoAttributes.Select(attr => @$"{attr.Key}=""{attr.Value}""");
 
-            var oEmbedEntry = new OEmbedResponse
-            {
-                Type = content is IContentVideo ? "video" : "image",
-                Title = content.Title ?? content.Name,
-                Width = width,
-                Height = height,
-                Html = @$"<video width=""{width}"" height=""{height}"" {string.Join(" ", videoAttributes.Select(attr => @$"{attr.Key}=""{attr.Value}"""))}><source src=""{friendlyUrl}""></video>",
-            };
-
-            return oEmbedEntry;
+            return string.Join(" ", attributes);
         }
 
         protected virtual async Task<(int, int)> GetDimensionsAsync(IOEmbedMedia content, CancellationToken cancellationToken)

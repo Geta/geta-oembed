@@ -22,18 +22,23 @@ namespace Geta.OEmbed.Optimizely.Tests
             var providerClientFactory = CreateHttpClientFactory(() => GetProviderMessageHandler());
             var endpointClientFactory = CreateHttpClientFactory(() => GetEndpointMessageHandler());
 
-            var manifestLoader = new HttpClientManifestLoader(providerClientFactory);
+            var config = new OEmbedConfiguration();
+            var manifestLoader = new HttpClientManifestLoader(config, providerClientFactory.CreateClient());
             var repository = new OEmbedProviderRepository(manifestLoader);
-            var embedService = new OEmbedService(repository, endpointClientFactory);
+            var urlBuilders = new[] { new DefaultProviderUrlBuilder() };
+            var embedFormatters = Enumerable.Empty<IProviderResponseFormatter>();
+
+            var embedService = new OEmbedService(repository, urlBuilders, embedFormatters, endpointClientFactory.CreateClient());
 
             serviceCollection.AddSingleton<IOEmbedService>(embedService);
 
             _serviceProvider = serviceCollection.BuildServiceProvider();
-        }
+        }        
 
         public void Dispose()
         {
-            _serviceProvider.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(true);
         }
 
         [Fact]
@@ -100,6 +105,14 @@ namespace Geta.OEmbed.Optimizely.Tests
                 throw new InvalidOperationException("objectValue cannot be null here");
 
             Assert.Equal(typeof(OEmbedResponse), objectValue.GetType());
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _serviceProvider?.Dispose();
+            }
         }
 
         private static MockHttpClientFactory CreateHttpClientFactory(Func<MockHttpMessageHandler> handlerFactory)

@@ -5,8 +5,10 @@ using EPiServer.Framework.Cache;
 using EPiServer.Web;
 using Geta.OEmbed.DependencyInjection;
 using Geta.OEmbed.Optimizely.DependencyInjection;
+using Geta.OEmbed.Providers;
 using Geta.OEmbed.Tests.Common.Caching;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -31,9 +33,15 @@ namespace Geta.OEmbed.Optimizely.Tests
 
             var embedRepository = serviceProvider.GetService<IOEmbedProviderRepository>();
             var embedService = serviceProvider.GetService<IOEmbedService>();
+            var responseFormatters = serviceProvider.GetService<IEnumerable<IProviderResponseFormatter>>();
+            var providerUrlBuilders = serviceProvider.GetService<IEnumerable<IProviderUrlBuilder>>();
 
             Assert.NotNull(embedRepository);
             Assert.NotNull(embedService);
+            Assert.NotNull(responseFormatters);
+            Assert.NotNull(providerUrlBuilders);
+            Assert.True(responseFormatters?.Any());
+            Assert.True(providerUrlBuilders?.Any());
         }
 
         [Fact]
@@ -61,7 +69,13 @@ namespace Geta.OEmbed.Optimizely.Tests
                 if (dataSource is null)
                     throw new InvalidOperationException("dataSource cannot be null here");
 
-                Assert.Equal(2, dataSource.Endpoints.Count);
+                foreach (var endpoint in dataSource.Endpoints)
+                {
+                    if (endpoint is not RouteEndpoint route)
+                        continue;
+
+                    Assert.EndsWith("oembed", route.RoutePattern.RawText);
+                }
             });
         }
     }
