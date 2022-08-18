@@ -38,7 +38,7 @@ namespace Geta.OEmbed.Optimizely.Tests
         public void Dispose()
         {
             Dispose(true);
-            GC.SuppressFinalize(true);
+            GC.SuppressFinalize(this);
         }
 
         [Fact]
