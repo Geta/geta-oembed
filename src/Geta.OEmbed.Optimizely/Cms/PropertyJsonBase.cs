@@ -81,7 +81,7 @@ namespace Geta.OEmbed.Optimizely.Cms
             {
                 LongString = JsonConvert.SerializeObject(value, GetJsonOptions());
             }
-            catch (Exception)
+            catch (JsonException)
             {
                 LongString = null;
             }
@@ -93,7 +93,7 @@ namespace Geta.OEmbed.Optimizely.Cms
             {
                 _deserializedValue = JsonConvert.DeserializeObject<T>(LongString, GetJsonOptions());
             }
-            catch (Exception)
+            catch (JsonException)
             {
                 _deserializedValue = null;
             }
