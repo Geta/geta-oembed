@@ -43,7 +43,7 @@ namespace Geta.OEmbed.Optimizely.Cms
                         LongString = null;
                         break;
                     default:
-                        throw new Exception($"Value must be of type {typeof(T).Name} or a JSON string that can be deserialized to {typeof(T).Name}");
+                        throw new InvalidOperationException($"Value must be of type {typeof(T).Name} or a JSON string that can be deserialized to {typeof(T).Name}");
                 }
             }
         }
