@@ -28,7 +28,7 @@ jobs:
         run: dotnet pack --configuration Release /p:Version=${{env.VERSION}} --no-build --output .
       - name: Push
         run: |
-          dotnet nuget push Geta.OEmbed.${{env.VERSION}}.nupkg --source https://nuget.pkg.github.com/Geta/index.json --api-key ${{env.GITHUB_TOKEN}}
+          dotnet nuget push Geta.OEmbed.Client.${{env.VERSION}}.nupkg --source https://nuget.pkg.github.com/Geta/index.json --api-key ${{env.GITHUB_TOKEN}}
           dotnet nuget push Geta.OEmbed.AspNetCore.Mvc.${{env.VERSION}}.nupkg --source https://nuget.pkg.github.com/Geta/index.json --api-key ${{env.GITHUB_TOKEN}}
           dotnet nuget push Geta.OEmbed.Optimizely.${{env.VERSION}}.nupkg --source https://nuget.pkg.github.com/Geta/index.json --api-key ${{env.GITHUB_TOKEN}}
           dotnet nuget push Geta.OEmbed.Optimizely.ContentDeliveryApi.${{env.VERSION}}.nupkg --source https://nuget.pkg.github.com/Geta/index.json --api-key ${{env.GITHUB_TOKEN}}
