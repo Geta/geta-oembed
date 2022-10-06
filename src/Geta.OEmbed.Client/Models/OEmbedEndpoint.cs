@@ -3,7 +3,7 @@
 
 using System.Text.Json.Serialization;
 
-namespace Geta.OEmbed.Models
+namespace Geta.OEmbed.Client.Models
 {
     public class OEmbedEndpoint
     {

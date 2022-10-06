@@ -3,7 +3,7 @@
 
 using System.Web;
 
-namespace Geta.OEmbed.Providers
+namespace Geta.OEmbed.Client.Providers
 {
     public class DefaultProviderUrlBuilder : IProviderUrlBuilder
     {
@@ -11,7 +11,7 @@ namespace Geta.OEmbed.Providers
         {
             return true;
         }
-       
+
         public virtual string Build(string url, IOEmbedProvider oEmbedProvider, OEmbedOptions embedOptions)
         {
             var providerOEmbedUrl = GetOEmbedUrl(oEmbedProvider);

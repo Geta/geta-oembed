@@ -2,7 +2,8 @@
 // Licensed under Apache-2.0. See the LICENSE file in the project root for more information
 
 using EPiServer.Framework.Cache;
-using Geta.OEmbed.Models;
+using Geta.OEmbed.Client;
+using Geta.OEmbed.Client.Models;
 
 namespace Geta.OEmbed.Optimizely.Caching
 {

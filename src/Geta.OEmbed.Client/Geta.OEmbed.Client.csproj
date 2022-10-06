@@ -6,8 +6,8 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-		<PackageId>Geta.OEmbed</PackageId>
-		<Title>Geta oEmbed</Title>
+		<PackageId>Geta.OEmbed.Client</PackageId>
+		<Title>Geta oEmbed client</Title>
 		<Authors>Geta Digital</Authors>
 		<Company>Geta Digital</Company>
 		<PackageIcon>icon.png</PackageIcon>

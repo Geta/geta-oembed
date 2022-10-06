@@ -3,9 +3,10 @@
 
 using EPiServer.Framework.Cache;
 using EPiServer.Web;
-using Geta.OEmbed.DependencyInjection;
+using Geta.OEmbed.Client;
+using Geta.OEmbed.Client.DependencyInjection;
+using Geta.OEmbed.Client.Providers;
 using Geta.OEmbed.Optimizely.DependencyInjection;
-using Geta.OEmbed.Providers;
 using Geta.OEmbed.Tests.Common.Caching;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;

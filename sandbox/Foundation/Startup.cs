@@ -21,7 +21,7 @@ using Foundation.Infrastructure.Display;
 using Geta.NotFoundHandler.Infrastructure.Configuration;
 using Geta.NotFoundHandler.Infrastructure.Initialization;
 using Geta.NotFoundHandler.Optimizely.Infrastructure.Configuration;
-using Geta.OEmbed.DependencyInjection;
+using Geta.OEmbed.Client.DependencyInjection;
 using Geta.OEmbed.Optimizely.DependencyInjection;
 using Geta.Optimizely.Categories.Configuration;
 using Geta.Optimizely.Categories.Find.Infrastructure.Initialization;

@@ -3,10 +3,10 @@
 
 using System.Net.Http.Headers;
 using System.Text.Json;
-using Geta.OEmbed.Models;
-using Geta.OEmbed.Providers;
+using Geta.OEmbed.Client.Models;
+using Geta.OEmbed.Client.Providers;
 
-namespace Geta.OEmbed
+namespace Geta.OEmbed.Client
 {
     public class OEmbedService : IOEmbedService
     {
@@ -58,7 +58,7 @@ namespace Geta.OEmbed
             };
 
             var response = await _httpClient.SendAsync(request, cancellationToken);
-            
+
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStreamAsync(cancellationToken);

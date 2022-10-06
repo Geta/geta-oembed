@@ -13,7 +13,7 @@ Provides tooling for integrating with the oEmbed standard
 
 Requires using .NET 5.0 or higher
 
-- `dotnet add package Geta.OEmbed`
+- `dotnet add package Geta.OEmbed.Client`
 
 In Startup.cs
 

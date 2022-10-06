@@ -1,11 +1,11 @@
 // Copyright (c) Geta Digital. All rights reserved.
 // Licensed under Apache-2.0. See the LICENSE file in the project root for more information
 
-using Geta.OEmbed.Providers;
+using Geta.OEmbed.Client.Providers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Geta.OEmbed.DependencyInjection
+namespace Geta.OEmbed.Client.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {

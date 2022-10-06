@@ -4,7 +4,7 @@
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 
-namespace Geta.OEmbed.Models
+namespace Geta.OEmbed.Client.Models
 {
     public class OEmbedResponse
     {
@@ -55,11 +55,11 @@ namespace Geta.OEmbed.Models
         [JsonPropertyName("thumbnail_width")]
         [JsonProperty("thumbnail_width")]
         public int ThumbnailWidth { get; set; }
-        
+
         [JsonPropertyName("thumbnail_height")]
         [JsonProperty("thumbnail_height")]
         public int ThumbnailHeight { get; set; }
-        
+
         [JsonPropertyName("thumbnail_url")]
         [JsonProperty("thumbnail_url")]
         public string ThumbnailUrl { get; set; } = string.Empty;

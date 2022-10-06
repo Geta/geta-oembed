@@ -1,11 +1,12 @@
-﻿// Copyright (c) Geta Digital. All rights reserved.
+// Copyright (c) Geta Digital. All rights reserved.
 // Licensed under Apache-2.0. See the LICENSE file in the project root for more information
 
 using EPiServer.Framework.Cache;
 using EPiServer.Web;
+using Geta.OEmbed.Client;
+using Geta.OEmbed.Client.Providers;
 using Geta.OEmbed.Optimizely.Caching;
 using Geta.OEmbed.Optimizely.Tests.Common.Repositories;
-using Geta.OEmbed.Providers;
 using Geta.OEmbed.Tests.Common.Caching;
 using Geta.OEmbed.Tests.Common.Factories;
 using Microsoft.Extensions.DependencyInjection;

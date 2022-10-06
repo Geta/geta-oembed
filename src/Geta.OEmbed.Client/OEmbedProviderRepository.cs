@@ -1,10 +1,10 @@
 // Copyright (c) Geta Digital. All rights reserved.
 // Licensed under Apache-2.0. See the LICENSE file in the project root for more information
 
-using Geta.OEmbed.Providers;
+using Geta.OEmbed.Client.Providers;
 using System.Text.RegularExpressions;
 
-namespace Geta.OEmbed
+namespace Geta.OEmbed.Client
 {
     public class OEmbedProviderRepository : IOEmbedProviderRepository
     {
@@ -53,7 +53,7 @@ namespace Geta.OEmbed
                 .Where(scheme => !string.IsNullOrEmpty(scheme))
                 .Select(scheme => new Regex(@$"^{ToRegExString(scheme)}$"))
                 .ToList();
-    
+
             var isMatch = schemesRegEx.Any(x => x.IsMatch(url));
             return isMatch;
         }
@@ -64,7 +64,7 @@ namespace Geta.OEmbed
                 .Replace("/", @"\/")
                 .Replace(".", @"\.")
                 .Replace("*", "(.{1,})");
-            
+
             return scheme;
         }
     }

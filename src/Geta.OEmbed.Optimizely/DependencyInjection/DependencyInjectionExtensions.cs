@@ -4,6 +4,7 @@
 using EPiServer.Framework.Cache;
 using EPiServer.Shell.Modules;
 using EPiServer.Web;
+using Geta.OEmbed.Client;
 using Geta.OEmbed.Optimizely.Caching;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;

@@ -1,16 +1,16 @@
 ﻿// Copyright (c) Geta Digital. All rights reserved.
 // Licensed under Apache-2.0. See the LICENSE file in the project root for more information
 
-using Geta.OEmbed.Models;
+using Geta.OEmbed.Client.Models;
 using System.Text.Json;
 
-namespace Geta.OEmbed.Providers
+namespace Geta.OEmbed.Client.Providers
 {
     public class HttpClientManifestLoader : IProviderManifestLoader
     {
         private readonly OEmbedConfiguration _configuration;
         private readonly HttpClient _httpClient;
-        
+
         public HttpClientManifestLoader(OEmbedConfiguration configuration, HttpClient httpClient)
         {
             _configuration = configuration;

@@ -1,9 +1,10 @@
-﻿// Copyright (c) Geta Digital. All rights reserved.
+// Copyright (c) Geta Digital. All rights reserved.
 // Licensed under Apache-2.0. See the LICENSE file in the project root for more information
 
 using Geta.OEmbed.AspNetCore.Mvc;
-using Geta.OEmbed.Models;
-using Geta.OEmbed.Providers;
+using Geta.OEmbed.Client;
+using Geta.OEmbed.Client.Models;
+using Geta.OEmbed.Client.Providers;
 using Geta.OEmbed.Tests.Common.Factories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;

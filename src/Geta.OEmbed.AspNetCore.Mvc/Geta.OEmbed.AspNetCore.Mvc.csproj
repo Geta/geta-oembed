@@ -24,7 +24,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Geta.OEmbed\Geta.OEmbed.csproj" />
+	  <ProjectReference Include="..\Geta.OEmbed.Client\Geta.OEmbed.Client.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

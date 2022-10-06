@@ -4,7 +4,7 @@
 using EPiServer;
 using EPiServer.Core;
 using EPiServer.Web.Routing;
-using Geta.OEmbed.Models;
+using Geta.OEmbed.Client.Models;
 using Geta.OEmbed.Optimizely.Models;
 using File = TagLib.File;
 

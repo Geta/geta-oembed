@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Geta.OEmbed\Geta.OEmbed.csproj" />
+    <ProjectReference Include="..\..\src\Geta.OEmbed.Client\Geta.OEmbed.Client.csproj" />
     <ProjectReference Include="..\Geta.OEmbed.Tests.Common\Geta.OEmbed.Tests.Common.csproj" />
   </ItemGroup>
 

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.OEmbed", "src\Geta.OEmbed\Geta.OEmbed.csproj", "{C36C2D17-986B-4F72-A615-6EAE32AE3D5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.OEmbed.Client", "src\Geta.OEmbed.Client\Geta.OEmbed.Client.csproj", "{C36C2D17-986B-4F72-A615-6EAE32AE3D5A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.OEmbed.Optimizely", "src\Geta.OEmbed.Optimizely\Geta.OEmbed.Optimizely.csproj", "{1F0FB51C-04CE-4746-BCFD-84617BB155BF}"
 EndProject
