@@ -3,6 +3,7 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<VersionPrefix>2021.04.1.0</VersionPrefix>
 		<VersionSuffix></VersionSuffix>
+        <IsPackable>false</IsPackable>
 		<PackageVersion Condition=" '$(PackageVersion)' == '' ">$(VersionPrefix)$(VersionSuffix)</PackageVersion>
 		<UserSecretsId>d7a3b2bc-28be-46c4-9f93-834b8f74c413</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
