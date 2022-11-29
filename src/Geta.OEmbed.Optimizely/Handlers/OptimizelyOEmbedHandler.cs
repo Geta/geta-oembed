@@ -27,19 +27,35 @@ namespace Geta.OEmbed.Optimizely.Handlers
             }
 
             var (width, height) = await GetDimensionsAsync(content, cancellationToken);
-            var videoAttributes = FormatVideoAttributes(request);
-            var friendlyUrl = _urlResolver.GetUrl(request.Url);
+            var contentIsVideo = content is IContentVideo;
+            var html = contentIsVideo ? RenderVideoHtml(request, content, width, height) 
+                                      : RenderImageHtml(request, content, width, height);
 
             var oEmbedEntry = new OEmbedResponse
             {
-                Type = content is IContentVideo ? "video" : "image",
+                Type = contentIsVideo ? "video" : "image",
                 Title = content.Title ?? content.Name,
                 Width = width,
                 Height = height,
-                Html = @$"<video width=""{width}"" height=""{height}"" {videoAttributes}><source src=""{friendlyUrl}""></video>",
+                Html = html,
             };
 
             return oEmbedEntry;
+        }
+
+        protected virtual string RenderVideoHtml(OEmbedRequest request, IOEmbedMedia content, int width, int height)
+        {
+            var videoAttributes = FormatVideoAttributes(request);
+            var friendlyUrl = FormatVideoUrl(request);
+
+            return @$"<video width=""{width}"" height=""{height}"" {videoAttributes}><source src=""{friendlyUrl}""></video>";
+        }
+
+        protected virtual string RenderImageHtml(OEmbedRequest request, IOEmbedMedia content, int width, int height)
+        {
+            var friendlyUrl = FormatImageUrl(request);
+
+            return @$"<img src=""{friendlyUrl}"" alt=""{content.Title}"" />";
         }
 
         protected virtual string FormatVideoAttributes(OEmbedRequest request)
@@ -69,6 +85,16 @@ namespace Geta.OEmbed.Optimizely.Handlers
             var attributes = videoAttributes.Select(attr => @$"{attr.Key}=""{attr.Value}""");
 
             return string.Join(" ", attributes);
+        }
+
+        protected virtual string FormatVideoUrl(OEmbedRequest request)
+        {
+            return _urlResolver.GetUrl(request.Url);
+        }
+
+        protected virtual string FormatImageUrl(OEmbedRequest request)
+        {
+            return _urlResolver.GetUrl(request.Url);
         }
 
         protected virtual async Task<(int, int)> GetDimensionsAsync(IOEmbedMedia content, CancellationToken cancellationToken)

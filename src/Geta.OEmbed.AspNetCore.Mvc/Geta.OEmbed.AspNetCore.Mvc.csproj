@@ -3,20 +3,20 @@
   <PropertyGroup>
     <TargetFrameworks>net6.0;net5.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
-	<Nullable>enable</Nullable>
-	<ImplicitUsings>enable</ImplicitUsings>
-	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-	<PackageId>Geta.OEmbed.AspNetCore.Mvc</PackageId>
-	<Title>Geta oEmbed Mvc</Title>
-	<Authors>Geta Digital</Authors>
-	<Company>Geta Digital</Company>
-	<PackageIcon>icon.png</PackageIcon>
-	<PackageIconUrl>https://cdn.geta.no/opensource/icons/Geta-logo-3.png</PackageIconUrl>
-	<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-	<Description>Tooling for integrating oEmbed standard against .NET core MVC.</Description>
-	<PackageTags>Geta oEmbed Video AspNetCore Mvc</PackageTags>
-	<RepositoryType>Git</RepositoryType>
-	<RepositoryUrl>https://github.com/Geta/geta-oembed</RepositoryUrl>
+	  <Nullable>enable</Nullable>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	  <PackageId>Geta.OEmbed.AspNetCore.Mvc</PackageId>
+	  <Title>Geta oEmbed Mvc</Title>
+	  <Authors>Geta Digital</Authors>
+	  <Company>Geta Digital</Company>
+	  <PackageIcon>icon.png</PackageIcon>
+	  <PackageIconUrl>https://cdn.geta.no/opensource/icons/Geta-logo-3.png</PackageIconUrl>
+	  <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+	  <Description>Tooling for integrating oEmbed standard against .NET core MVC.</Description>
+	  <PackageTags>Geta oEmbed Video AspNetCore Mvc</PackageTags>
+	  <RepositoryType>Git</RepositoryType>
+	  <RepositoryUrl>https://github.com/Geta/geta-oembed</RepositoryUrl>
   </PropertyGroup>
 
 	<ItemGroup>

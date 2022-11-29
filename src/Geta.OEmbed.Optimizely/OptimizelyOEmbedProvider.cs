@@ -42,8 +42,7 @@ namespace Geta.OEmbed.Optimizely
 
             foreach (var definition in _siteDefinitionRepository.List())
             {
-                var editHost = definition.Hosts.FirstOrDefault(x => x.Type == HostDefinitionType.Edit);
-                if (editHost is null)
+                if (!IsValidSiteDefinition(definition))
                 {
                     continue;
                 }
@@ -53,6 +52,12 @@ namespace Geta.OEmbed.Optimizely
             }
 
             return endpoints;
+        }
+
+        protected virtual bool IsValidSiteDefinition(SiteDefinition definition)
+        {
+            var editHost = definition.Hosts.FirstOrDefault(x => x.Type == HostDefinitionType.Edit);
+            return editHost != null;
         }
 
         protected virtual OEmbedEndpoint GetEndpoint(SiteDefinition definition)
