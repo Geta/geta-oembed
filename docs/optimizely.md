@@ -15,6 +15,7 @@ public void ConfigureServices(IServiceCollection services)
 {
     ...
     services.AddGetaOEmbedOptimizely();
+    services.AddGetaOEmbed();
 }
 ```
 
@@ -31,6 +32,10 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     });
 }
 ```
+
+### Decorate ContentMedia
+
+Implement the interface `IOEmbedMedia` on all media data you want usable by the property.
 
 ## Adding support for EPiServer.ContentDeliveryApi
 

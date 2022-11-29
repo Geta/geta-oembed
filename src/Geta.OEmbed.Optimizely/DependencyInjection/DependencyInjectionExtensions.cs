@@ -6,6 +6,7 @@ using EPiServer.Shell.Modules;
 using EPiServer.Web;
 using Geta.OEmbed.Client;
 using Geta.OEmbed.Optimizely.Caching;
+using Geta.OEmbed.Optimizely.Handlers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,7 @@ namespace Geta.OEmbed.Optimizely.DependencyInjection
         public static IServiceCollection AddGetaOEmbedOptimizely(this IServiceCollection services)
         {
             services.TryAddScoped<OptimizelyOEmbedProvider>();
+            services.TryAddScoped<OptimizelyOEmbedHandler>();
             services.TryAddSingleton<IOEmbedProviderRepository>(provider => new CachedOEmbedProviderRepository(
                 provider.GetRequiredService<OEmbedProviderRepository>(),
                 provider.GetRequiredService<ISynchronizedObjectInstanceCache>(),

@@ -34,6 +34,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.OEmbed.Tests.Common", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.OEmbed.Optimizely.Tests.Common", "tests\Geta.OEmbed.Optimizely.Tests.Common\Geta.OEmbed.Optimizely.Tests.Common.csproj", "{7AB33ECE-A9B8-4D06-91DB-C23BBC228DFC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{3F4DFF04-2C88-41FE-B424-D431E4356C33}"
+	ProjectSection(SolutionItems) = preProject
+		docs\extension-points.md = docs\extension-points.md
+		docs\optimizely.md = docs\optimizely.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +92,7 @@ Global
 		{E5F4B8BB-3B45-4356-9F27-506B03891E8A} = {96C6141F-2CD5-4953-9A9A-15BF927FFF85}
 		{CE3226F2-D0E5-41D6-9475-E84812F3C295} = {96C6141F-2CD5-4953-9A9A-15BF927FFF85}
 		{7AB33ECE-A9B8-4D06-91DB-C23BBC228DFC} = {96C6141F-2CD5-4953-9A9A-15BF927FFF85}
+		{3F4DFF04-2C88-41FE-B424-D431E4356C33} = {DFD0FE65-2A74-463E-9352-AF753AD90D21}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {39C04A54-296E-43DE-9AD1-6F8ED2B5C61E}
