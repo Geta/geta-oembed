@@ -1,10 +1,13 @@
 // Copyright (c) Geta Digital. All rights reserved.
 // Licensed under Apache-2.0. See the LICENSE file in the project root for more information
 
+using EPiServer.Web.Routing;
 using Geta.OEmbed.AspNetCore.Mvc;
 using Geta.OEmbed.Client;
 using Geta.OEmbed.Client.Models;
 using Geta.OEmbed.Client.Providers;
+using Geta.OEmbed.Optimizely.Handlers;
+using Geta.OEmbed.Optimizely.Tests.Fakes;
 using Geta.OEmbed.Tests.Common.Factories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,6 +35,8 @@ namespace Geta.OEmbed.Optimizely.Tests
             var embedService = new OEmbedService(repository, urlBuilders, embedFormatters, endpointClientFactory.CreateClient());
 
             serviceCollection.AddSingleton<IOEmbedService>(embedService);
+            serviceCollection.AddSingleton<IUrlResolver, NullUrlResolver>();
+            serviceCollection.AddSingleton<OptimizelyOEmbedHandler>();
 
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }        
@@ -57,28 +62,17 @@ namespace Geta.OEmbed.Optimizely.Tests
 
             var result = await subject.Get(request, CancellationToken.None);
             Assert.NotNull(result);
+            Assert.Equal(typeof(OkObjectResult), result!.GetType());
 
-            if (result is null)
-                throw new InvalidOperationException("response cannot be null here");
-
-            Assert.Equal(typeof(OkObjectResult), result.GetType());
-
-            if (result is not OkObjectResult objectResult)
-                throw new InvalidOperationException("objectResult cannot be null here");
-
-            var objectValue = objectResult.Value;
+            var objectValue = ((OkObjectResult)result).Value;
             Assert.NotNull(objectValue);
-
-            if (objectValue is null)
-                throw new InvalidOperationException("objectValue cannot be null here");
-
-            Assert.Equal(typeof(OEmbedResponse), objectValue.GetType());
+            Assert.Equal(typeof(OEmbedResponse), objectValue!.GetType());
         }
 
         [Fact]
         public async Task CmsOEmbedController_can_Get()
         {
-            var url = "https://www.youtube.com/watch?v=HmZKgaHa3Fg";
+            var url = "https://localhost/globalassets/test.jpg";
             var subject = ActivatorUtilities.CreateInstance<OEmbedCmsController>(_serviceProvider);
             var request = new OEmbedRequest
             {
@@ -89,23 +83,9 @@ namespace Geta.OEmbed.Optimizely.Tests
             };
 
             var result = await subject.Index(request, CancellationToken.None);
+
             Assert.NotNull(result);
-
-            if (result is null)
-                throw new InvalidOperationException("response cannot be null here");
-
-            Assert.Equal(typeof(OkObjectResult), result.GetType());
-
-            if (result is not OkObjectResult objectResult)
-                throw new InvalidOperationException("objectResult cannot be null here");
-
-            var objectValue = objectResult.Value;
-            Assert.NotNull(objectValue);
-
-            if (objectValue is null)
-                throw new InvalidOperationException("objectValue cannot be null here");
-
-            Assert.Equal(typeof(OEmbedResponse), objectValue.GetType());
+            Assert.Equal(typeof(NotFoundResult), result!.GetType());
         }
 
         protected virtual void Dispose(bool disposing)
