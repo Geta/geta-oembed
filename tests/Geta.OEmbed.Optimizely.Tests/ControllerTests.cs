@@ -8,6 +8,7 @@ using Geta.OEmbed.Client.Models;
 using Geta.OEmbed.Client.Providers;
 using Geta.OEmbed.Optimizely.Handlers;
 using Geta.OEmbed.Optimizely.Tests.Fakes;
+using Geta.OEmbed.Optimizely.Tests.Memory;
 using Geta.OEmbed.Tests.Common.Factories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,10 +19,13 @@ namespace Geta.OEmbed.Optimizely.Tests
     public class ControllerTests : IDisposable
     {      
         private readonly ServiceProvider _serviceProvider;
+        private readonly MemoryUrlResolver _memoryUrlResolver;
 
         public ControllerTests()
         {
             var serviceCollection = new ServiceCollection();
+
+            _memoryUrlResolver = new MemoryUrlResolver();
 
             var providerClientFactory = CreateHttpClientFactory(() => GetProviderMessageHandler());
             var endpointClientFactory = CreateHttpClientFactory(() => GetEndpointMessageHandler());
@@ -35,7 +39,7 @@ namespace Geta.OEmbed.Optimizely.Tests
             var embedService = new OEmbedService(repository, urlBuilders, embedFormatters, endpointClientFactory.CreateClient());
 
             serviceCollection.AddSingleton<IOEmbedService>(embedService);
-            serviceCollection.AddSingleton<IUrlResolver, NullUrlResolver>();
+            serviceCollection.AddSingleton<IUrlResolver>(_memoryUrlResolver);
             serviceCollection.AddSingleton<OptimizelyOEmbedHandler>();
 
             _serviceProvider = serviceCollection.BuildServiceProvider();
@@ -81,8 +85,32 @@ namespace Geta.OEmbed.Optimizely.Tests
                 Loop = true,
                 Muted = true
             };
+            var expected = new TestOEmbedMedia
+            {
+                Name = "test.jpg",
+                Width = 200,
+                Height = 150                
+            };
+
+            _memoryUrlResolver.Clear();
+            _memoryUrlResolver.Add(url, expected);
 
             var result = await subject.Index(request, CancellationToken.None);
+
+            Assert.NotNull(result);
+            Assert.Equal(typeof(OkObjectResult), result!.GetType());
+
+            var objectValue = ((OkObjectResult)result).Value;
+            Assert.NotNull(objectValue);
+            Assert.Equal(typeof(OEmbedResponse), objectValue!.GetType());
+
+            var response = (OEmbedResponse)objectValue;
+            Assert.Equal(response.Width, expected.Width);
+            Assert.Equal(response.Height, expected.Height);
+            Assert.Equal(response.Title, expected.Name);
+
+            request.Url = "https://localhost/globalassets/notfound.jpg";
+            result = await subject.Index(request, CancellationToken.None);
 
             Assert.NotNull(result);
             Assert.Equal(typeof(NotFoundResult), result!.GetType());
