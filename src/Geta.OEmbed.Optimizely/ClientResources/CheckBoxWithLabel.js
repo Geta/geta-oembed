@@ -3,15 +3,15 @@
 
 /* eslint-disable */
 define([
-    "dojo/_base/declare",
+    'dojo/_base/declare',
 
-    "dijit/_WidgetBase",
-    "dijit/_TemplatedMixin",
-    "dijit/_WidgetsInTemplateMixin",
+    'dijit/_WidgetBase',
+    'dijit/_TemplatedMixin',
+    'dijit/_WidgetsInTemplateMixin',
 
-    "dijit/form/CheckBox",
+    'dijit/form/CheckBox',
 
-    "dojo/text!./templates/CheckBoxWithLabel.html"
+    'dojo/text!./templates/CheckBoxWithLabel.html',
 ], function (
     declare,
 
@@ -23,36 +23,29 @@ define([
 
     template,
 ) {
-    return declare(
-        [
-            _WidgetBase,
-            _TemplatedMixin,
-            _WidgetsInTemplateMixin,
-        ],
-        {
-            templateString: template,
+    return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
+        templateString: template,
 
-            startup: function() {
-                this.inherited(arguments);
+        startup: function () {
+            this.inherited(arguments);
 
-                this.connect(this.focusNode, "onChange", "onChange");
-            },
+            this.connect(this.focusNode, 'onChange', 'onChange');
+        },
 
-            _getValueAttr: function() {
-                return this.focusNode.get("value");
-            },
+        _getValueAttr: function () {
+            return this.focusNode.get('value');
+        },
 
-            _setValueAttr: function(value) {
-                this.focusNode.set("value", value);
-            },
+        _setValueAttr: function (value) {
+            this.focusNode.set('value', value);
+        },
 
-            _getCheckedAttr: function() {
-                return this.focusNode.get("checked");
-            },
+        _getCheckedAttr: function () {
+            return this.focusNode.get('checked');
+        },
 
-            _setCheckedAttr: function(checked) {
-                this.focusNode.set("checked", checked);
-            },
-        }
-    );
+        _setCheckedAttr: function (checked) {
+            this.focusNode.set('checked', checked);
+        },
+    });
 });

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.4]
+
+### Fixed
+
+- Fixed issue with dojo widget not initializing properly in on-page edit mode.
+
 ## [1.0.3]
 
 ### Added
