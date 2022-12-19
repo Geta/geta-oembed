@@ -7,7 +7,7 @@ namespace Geta.OEmbed.Optimizely.Models
 {
     public interface IOEmbedMedia : IContentMedia
     {
-        string Title { get; }
+        string? Title { get; }
         int? Width { get; }
         int? Height { get; }
     }

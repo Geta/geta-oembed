@@ -9,9 +9,9 @@ namespace Geta.OEmbed.Optimizely
 {
     public class OEmbedCmsController : ControllerBase
     {
-        private readonly OptimizelyOEmbedHandler _oEmbedHandler;
+        private readonly IOptimizelyOEmbedHandler _oEmbedHandler;
 
-        public OEmbedCmsController(OptimizelyOEmbedHandler embedHandler)
+        public OEmbedCmsController(IOptimizelyOEmbedHandler embedHandler)
         {
             _oEmbedHandler = embedHandler;
         }
