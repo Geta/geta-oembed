@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0]
+
+### Breaking change
+
+- Changed `IOEmbedMedia` Title property to nullable string
+
 ## [1.0.4]
 
 ### Fixed

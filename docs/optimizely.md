@@ -14,8 +14,8 @@ Register the required services by executing the below extension method on your `
 public void ConfigureServices(IServiceCollection services)
 {
     ...
-    services.AddGetaOEmbedOptimizely();
     services.AddGetaOEmbed();
+    services.AddGetaOEmbedOptimizely();
 }
 ```
 
