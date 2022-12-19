@@ -1,4 +1,4 @@
-﻿// Copyright (c) Geta Digital. All rights reserved.
+// Copyright (c) Geta Digital. All rights reserved.
 // Licensed under Apache-2.0. See the LICENSE file in the project root for more information
 
 using EPiServer.Framework.Cache;
@@ -7,6 +7,7 @@ using Geta.OEmbed.Client;
 using Geta.OEmbed.Client.DependencyInjection;
 using Geta.OEmbed.Client.Providers;
 using Geta.OEmbed.Optimizely.DependencyInjection;
+using Geta.OEmbed.Optimizely.Tests.Memory;
 using Geta.OEmbed.Tests.Common.Caching;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
@@ -24,8 +25,10 @@ namespace Geta.OEmbed.Optimizely.Tests
 
             var instanceCache = new MemoryInstanceCache();
             var syncronizedCache = new FakeSynchronizedObjectInstanceCache(instanceCache);
+            var siteDefinitionRepository = new MemorySiteDefinitionRepository(Enumerable.Empty<SiteDefinition>());
 
             serviceCollection.AddSingleton<ISynchronizedObjectInstanceCache>(syncronizedCache);
+            serviceCollection.AddSingleton<ISiteDefinitionRepository>(siteDefinitionRepository);
 
             serviceCollection.AddGetaOEmbed();
             serviceCollection.AddGetaOEmbedOptimizely();

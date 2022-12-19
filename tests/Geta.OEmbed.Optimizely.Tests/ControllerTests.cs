@@ -1,6 +1,7 @@
 // Copyright (c) Geta Digital. All rights reserved.
 // Licensed under Apache-2.0. See the LICENSE file in the project root for more information
 
+using EPiServer.Web;
 using EPiServer.Web.Routing;
 using Geta.OEmbed.AspNetCore.Mvc;
 using Geta.OEmbed.Client;
@@ -40,10 +41,10 @@ namespace Geta.OEmbed.Optimizely.Tests
 
             serviceCollection.AddSingleton<IOEmbedService>(embedService);
             serviceCollection.AddSingleton<IUrlResolver>(_memoryUrlResolver);
-            serviceCollection.AddSingleton<OptimizelyOEmbedHandler>();
+            serviceCollection.AddSingleton<IOptimizelyOEmbedHandler, OptimizelyOEmbedHandler>();
 
             _serviceProvider = serviceCollection.BuildServiceProvider();
-        }        
+        }
 
         public void Dispose()
         {
