@@ -20,14 +20,14 @@ namespace Geta.OEmbed.Optimizely.DependencyInjection
         public static IServiceCollection AddGetaOEmbedOptimizely(this IServiceCollection services)
         {
             services.TryAddScoped<OptimizelyOEmbedProvider>();
-            services.TryAddScoped<OptimizelyOEmbedHandler>();
-            services.TryAddSingleton<IOEmbedProviderRepository>(provider => new CachedOEmbedProviderRepository(
+            services.TryAddScoped<IOptimizelyOEmbedHandler, OptimizelyOEmbedHandler>();
+            services.AddSingleton<IOEmbedProviderRepository>(provider => new CachedOEmbedProviderRepository(
                 provider.GetRequiredService<OEmbedProviderRepository>(),
                 provider.GetRequiredService<ISynchronizedObjectInstanceCache>(),
                 provider.GetRequiredService<OptimizelyOEmbedProvider>()));
 
-            services.TryAddSingleton<OEmbedService>();
-            services.TryAddSingleton<IOEmbedService>(provider =>
+            services.AddSingleton<OEmbedService>();
+            services.AddSingleton<IOEmbedService>(provider =>
                 new CachedOEmbedService(provider.GetRequiredService<OEmbedService>(),
                     provider.GetRequiredService<ISynchronizedObjectInstanceCache>()));
             

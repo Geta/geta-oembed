@@ -13,7 +13,7 @@ namespace Geta.OEmbed.Optimizely
         private readonly ISiteDefinitionRepository _siteDefinitionRepository;
         private readonly IOptions<UIOptions> _uiOptions;
         private readonly Lazy<List<OEmbedEndpoint>> _endpoints;
-        private readonly Lazy<string> _providerUrl;        
+        private readonly Lazy<string> _providerUrl;
 
         public OptimizelyOEmbedProvider(ISiteDefinitionRepository siteDefinitionRepository, IOptions<UIOptions> uiOptions)
         {
@@ -31,60 +31,57 @@ namespace Geta.OEmbed.Optimizely
 
         public virtual List<OEmbedEndpoint> Endpoints => _endpoints.Value;
 
-        public virtual string GetOEmbedUrl()
-        {
-            return FormatEndpointUrl(Endpoints.First().Url);
-        }
-
         protected virtual List<OEmbedEndpoint> GetEndpoints()
         {
             var endpoints = new List<OEmbedEndpoint>();
 
             foreach (var definition in _siteDefinitionRepository.List())
             {
-                if (!IsValidSiteDefinition(definition))
+                var editHost = GetEditHost(definition);
+
+                if (editHost == null)
                 {
                     continue;
                 }
 
-                var endpoint = GetEndpoint(definition);
+                var endpoint = GetEndpoint(definition, editHost);
                 endpoints.Add(endpoint);
             }
 
             return endpoints;
         }
 
-        protected virtual bool IsValidSiteDefinition(SiteDefinition definition)
+        protected virtual HostDefinition? GetEditHost(SiteDefinition definition)
         {
-            var editHost = definition.Hosts.FirstOrDefault(x => x.Type == HostDefinitionType.Edit);
-            return editHost != null;
+            return definition.Hosts.FirstOrDefault(x => x.Type == HostDefinitionType.Edit) ??
+                   definition.Hosts.FirstOrDefault(x => x.Type == HostDefinitionType.Primary);
         }
 
-        protected virtual OEmbedEndpoint GetEndpoint(SiteDefinition definition)
+        protected virtual OEmbedEndpoint GetEndpoint(SiteDefinition definition, HostDefinition editHost)
         {
             return new OEmbedEndpoint
             {
-                Url = GetEndpointUrl(definition),
-                Schemes = GetSchemes(definition),
+                Url = GetEndpointUrl(editHost),
+                Schemes = GetSchemes(definition, editHost),
                 Discovery = false
             };
         }
 
-        protected virtual string GetEndpointUrl(SiteDefinition definition)
+        protected virtual string GetEndpointUrl(HostDefinition editHost)
         {
-            var siteUrl = definition.SiteUrl;
+            var siteUrl = editHost.Url;
             var editUrl = _uiOptions.Value.EditUrl.ToString();
 
             return $"{siteUrl}{editUrl.TrimStart('~').TrimStart('/')}oembed";
         }
 
-        protected virtual List<string> GetSchemes(SiteDefinition definition)
+        protected virtual List<string> GetSchemes(SiteDefinition definition, HostDefinition editHost)
         {
             var schemes = new List<string>
             {
-                $"{definition.SiteUrl}globalassets/*.mp4|webm",
-                $"{definition.SiteUrl}globalassets/*.jpg|gif|png|webp",
-                $"{definition.SiteUrl}link/*.aspx",
+                $"{editHost.Url}globalassets/*.mp4|webm",
+                $"{editHost.Url}globalassets/*.jpg|gif|png|webp",
+                $"{editHost.Url}link/*.aspx",
                 "/globalassets/*.mp4|webm",
                 "/globalassets/*.jpg|gif|png|webp",
                 "/link/*.aspx"
@@ -92,23 +89,18 @@ namespace Geta.OEmbed.Optimizely
 
             if (!definition.SiteAssetsRoot.CompareToIgnoreWorkID(definition.GlobalAssetsRoot))
             {
-                schemes.Add($"{definition.SiteUrl}siteassets/*.mp4|webm");
-                schemes.Add($"{definition.SiteUrl}siteassets/*.jpg|gif|png|webp");
+                schemes.Add($"{editHost.Url}siteassets/*.mp4|webm");
+                schemes.Add($"{editHost.Url}siteassets/*.jpg|gif|png|webp");
                 schemes.Add("/siteassets/*.mp4|webm");
                 schemes.Add("/siteassets/*.jpg|gif|png|webp");
             }
 
             return schemes;
-        }        
+        }
 
         protected virtual string GetProviderUrl()
         {
             return Endpoints.FirstOrDefault()?.Url ?? string.Empty;
-        }
-
-        protected virtual string FormatEndpointUrl(string url)
-        {
-            return url.Replace("{format}", "json");
         }
     }
 }

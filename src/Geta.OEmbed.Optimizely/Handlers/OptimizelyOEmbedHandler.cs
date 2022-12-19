@@ -10,7 +10,7 @@ using File = TagLib.File;
 
 namespace Geta.OEmbed.Optimizely.Handlers
 {
-    public class OptimizelyOEmbedHandler
+    public class OptimizelyOEmbedHandler : IOptimizelyOEmbedHandler
     {
         private readonly IUrlResolver _urlResolver;
 
@@ -19,7 +19,7 @@ namespace Geta.OEmbed.Optimizely.Handlers
             _urlResolver = urlResolver;
         }
 
-        public async Task<OEmbedResponse?> HandleAsync(OEmbedRequest request, CancellationToken cancellationToken)
+        public virtual async Task<OEmbedResponse?> HandleAsync(OEmbedRequest request, CancellationToken cancellationToken)
         {
             if (_urlResolver.Route(new UrlBuilder(request.Url)) is not IOEmbedMedia content)
             {
