@@ -1,42 +1,37 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PackageId>Geta.OEmbed.Optimizely.ContentDeliveryApi</PackageId>
+    <Title>Geta oEmbed Optimizely ContentDelivery Api integration</Title>
+    <Authors>Geta Digital</Authors>
+    <Company>Geta Digital</Company>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageIconUrl>https://cdn.geta.no/opensource/icons/Geta-logo-3.png</PackageIconUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>Tooling for integrating oEmbed standard against Optimizely CMS and ContentDeliveryApi.</Description>
+    <PackageTags>Geta oEmbed Video Optimizely CMS ContentDeliveryApi</PackageTags>
+    <RepositoryType>Git</RepositoryType>
+    <RepositoryUrl>https://github.com/Geta/geta-oembed</RepositoryUrl>
+  </PropertyGroup>
 
-    <PropertyGroup>
-        <TargetFrameworks>net6.0;net5.0</TargetFrameworks>
-        <LangVersion>latest</LangVersion>
-		<Nullable>enable</Nullable>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-		<PackageId>Geta.OEmbed.Optimizely.ContentDeliveryApi</PackageId>
-		<Title>Geta oEmbed Optimizely ContentDelivery Api integration</Title>
-		<Authors>Geta Digital</Authors>
-		<Company>Geta Digital</Company>
-		<PackageIcon>icon.png</PackageIcon>
-		<PackageIconUrl>https://cdn.geta.no/opensource/icons/Geta-logo-3.png</PackageIconUrl>
-		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<Description>Tooling for integrating oEmbed standard against Optimizely CMS and ContentDeliveryApi.</Description>
-		<PackageTags>Geta oEmbed Video Optimizely CMS ContentDeliveryApi</PackageTags>
-		<RepositoryType>Git</RepositoryType>
-		<RepositoryUrl>https://github.com/Geta/geta-oembed</RepositoryUrl>
-    </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="EPiServer.ContentDeliveryApi.Core" Version="3.6.0" />
+  </ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
-		<PackageReference Include="EPiServer.ContentDeliveryApi.Core" Version="[3.0.0, 4.0.0)" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Geta.OEmbed.Optimizely\Geta.OEmbed.Optimizely.csproj" />
+  </ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-		<PackageReference Include="EPiServer.ContentDeliveryApi.Core" Version="[3.3.0, 4.0.0)" />
-	</ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="$(AssemblyName).Tests" />
+  </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Geta.OEmbed.Optimizely\Geta.OEmbed.Optimizely.csproj" />
-    </ItemGroup>
-
-	<ItemGroup>
-		<InternalsVisibleTo Include="$(AssemblyName).Tests" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Include="..\..\resources\icon.png" Pack="true" PackagePath="\" />
-	</ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\resources\icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
 </Project>
