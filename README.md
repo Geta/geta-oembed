@@ -11,7 +11,7 @@ Provides tooling for integrating with the oEmbed standard
 
 ## How to get started?
 
-Requires using .NET 5.0 or higher
+Requires using .NET 6.0 or higher
 
 - `dotnet add package Geta.OEmbed.Client`
 
@@ -32,7 +32,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## Package maintainer
 
-https://github.com/svenrog
+https://github.com/MattisOlsson
 
 ## Changelog
 

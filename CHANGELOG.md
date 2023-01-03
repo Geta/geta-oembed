@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.1]
+
+- Fixed issue with UrlSelector widget in CMS UI 12.15.0
+
 ## [2.0.0]
 
 ### Breaking change
