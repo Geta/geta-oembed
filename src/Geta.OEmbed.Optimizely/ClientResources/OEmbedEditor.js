@@ -74,12 +74,17 @@ define([
         },
 
         _createUrlSelector: function () {
+            if (this.params.commandOptions && this.params.commandOptions.dialogContentParams) {
+                this.params.commandOptions.dialogContentParams.modelType = this.metadata.additionalValues.modelType;
+            }
+
             this.urlSelector = new UrlSelector({
                 allowedTypes: this.allowedTypes,
                 allowedDndTypes: this.allowedDndTypes,
                 dndSourcePropertyName: this.dndSourcePropertyName,
-                metadata: this.metadata,
                 repositoryKey: this.repositoryKey,
+                params: this.params,
+                readOnly: false
             });
             this.urlSelector.placeAt(this._urlSelectorContainer);
             this.connect(this.urlSelector, 'onChange', '_onUrlChange');

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net5.0</TargetFrameworks>
+    <TargetFramework>net6.0</TargetFramework>
     <LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -23,17 +23,8 @@
     <PackageReference Include="TagLibSharp" Version="2.2.0" />
   </ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
-		<PackageReference Include="EPiServer.CMS.AspNetCore.Routing" Version="[12.0.3, 13.0.0)" />
-		<PackageReference Include="EPiServer.CMS.Core" Version="[12.0.3, 13.0.0)" />
-		<PackageReference Include="EPiServer.CMS.UI.Core" Version="[12.0.2, 13.0.0)" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-		<PackageReference Include="EPiServer.CMS.AspNetCore.Routing" Version="[12.4.0, 13.0.0)" />
-		<PackageReference Include="EPiServer.CMS.Core" Version="[12.4.0, 13.0.0)" />
-		<PackageReference Include="EPiServer.CMS.UI.Core" Version="[12.3.0, 13.0.0)" />
+	<ItemGroup>
+		<PackageReference Include="EPiServer.CMS.UI.Core" Version="[12.15.0, 13.0.0)" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
 	</ItemGroup>

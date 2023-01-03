@@ -9,6 +9,7 @@ using Foundation.Features.Shared;
 using Microsoft.AspNetCore.Http;
 using PowerSlice;
 using System.Linq;
+using ItemRange = EPiServer.Shell.Services.Rest.ItemRange;
 
 namespace Foundation.Infrastructure.PowerSlices
 {
