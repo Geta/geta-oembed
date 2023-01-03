@@ -32,7 +32,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## Package maintainer
 
-https://github.com/svenrog
+https://github.com/MattisOlsson
 
 ## Changelog
 
