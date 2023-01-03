@@ -83,6 +83,7 @@ define([
                 allowedDndTypes: this.allowedDndTypes,
                 dndSourcePropertyName: this.dndSourcePropertyName,
                 repositoryKey: this.repositoryKey,
+                metadata: this.metadata,
                 params: this.params,
                 readOnly: false
             });
