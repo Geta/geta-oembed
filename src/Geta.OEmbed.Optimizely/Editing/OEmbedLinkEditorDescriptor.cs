@@ -8,11 +8,16 @@ using Geta.OEmbed.Optimizely.Models;
 
 namespace Geta.OEmbed.Optimizely.Editing
 {
-    [EditorDescriptorRegistration(TargetType = typeof(string), UIHint = "HyperLink", EditorDescriptorBehavior = EditorDescriptorBehavior.PlaceLast)]
+    [EditorDescriptorRegistration(
+        TargetType = typeof(string),
+        UIHint = UiHint,
+        EditorDescriptorBehavior = EditorDescriptorBehavior.PlaceLast)]
     public class OEmbedLinkEditorDescriptor : EditorDescriptor
     {
-        private readonly string[] _excludedProviders = new[] { "Page", "Catalog content", "Email" };
-        
+        public const string UiHint = "HyperLink";
+        private const string ExternalLinkProviderName = "ExternalLink";
+        private const string MediaSearchArea = "CMS/Files";
+
         public override void ModifyMetadata(ExtendedMetadata metadata, IEnumerable<Attribute> attributes)
         {
             base.ModifyMetadata(metadata, attributes);
@@ -30,9 +35,10 @@ namespace Geta.OEmbed.Optimizely.Editing
             for (var i = providers.Count - 1; i >= 0; i--)
             {
                 var provider = providers[i];
-                var name = GetProviderName(provider);
+                var (name, searchArea) = GetProviderInfo(provider);
 
-                if (_excludedProviders.Any(p => p.Equals(name, StringComparison.OrdinalIgnoreCase)))
+                if (!name.Equals(ExternalLinkProviderName, StringComparison.OrdinalIgnoreCase)
+                    && !searchArea.Equals(MediaSearchArea, StringComparison.OrdinalIgnoreCase))
                 {
                     providers.RemoveAt(i);
                 }
@@ -41,21 +47,20 @@ namespace Geta.OEmbed.Optimizely.Editing
             metadata.EditorConfiguration["providers"] = providers;
         }
 
-        protected virtual string GetProviderName(object? provider)
+        protected virtual (string, string) GetProviderInfo(object? provider)
         {
             if (provider is null)
             {
-                return string.Empty;
-            }               
+                return (string.Empty, string.Empty);
+            }
 
             var providerType = provider.GetType();
             var nameProperty = providerType.GetProperty("Name");
-            if (nameProperty?.GetValue(provider) is not string nameValue)
-            {
-                return string.Empty;
-            }
+            var searchAreaProperty = providerType.GetProperty("SearchArea");
+            var nameValue = nameProperty?.GetValue(provider) as string ?? string.Empty;
+            var searchAreaValue = searchAreaProperty?.GetValue(provider) as string ?? string.Empty;
 
-            return nameValue;
+            return (nameValue, searchAreaValue);
         }
     }
 }
