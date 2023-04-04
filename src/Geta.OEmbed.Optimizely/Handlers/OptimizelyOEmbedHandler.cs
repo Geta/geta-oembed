@@ -28,7 +28,7 @@ namespace Geta.OEmbed.Optimizely.Handlers
 
             var (width, height) = await GetDimensionsAsync(content, cancellationToken);
             var contentIsVideo = content is IContentVideo;
-            var html = contentIsVideo ? RenderVideoHtml(request, content, width, height) 
+            var html = contentIsVideo ? RenderVideoHtml(request, content, width, height)
                                       : RenderImageHtml(request, content, width, height);
 
             var oEmbedEntry = new OEmbedResponse
@@ -65,6 +65,7 @@ namespace Geta.OEmbed.Optimizely.Handlers
             if (request.Autoplay)
             {
                 videoAttributes.Add("autoplay", "");
+                videoAttributes.Add("playsinline", "");
             }
 
             if (request.Controls)
