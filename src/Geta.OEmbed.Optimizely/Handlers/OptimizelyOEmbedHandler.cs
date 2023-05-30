@@ -6,7 +6,10 @@ using EPiServer.Core;
 using EPiServer.Web.Routing;
 using Geta.OEmbed.Client.Models;
 using Geta.OEmbed.Optimizely.Models;
-using File = TagLib.File;
+using Geta.VideoTools.Common;
+using Geta.VideoTools.Common.Models;
+using Geta.VideoTools.Mp4;
+using Geta.VideoTools.WebM;
 
 namespace Geta.OEmbed.Optimizely.Handlers
 {
@@ -26,7 +29,7 @@ namespace Geta.OEmbed.Optimizely.Handlers
                 return null;
             }
 
-            var (width, height) = await GetDimensionsAsync(content, cancellationToken);
+            var (width, height) = await GetDimensions(content);
             var contentIsVideo = content is IContentVideo;
             var html = contentIsVideo ? RenderVideoHtml(request, content, width, height)
                                       : RenderImageHtml(request, content, width, height);
@@ -98,36 +101,72 @@ namespace Geta.OEmbed.Optimizely.Handlers
             return _urlResolver.GetUrl(request.Url);
         }
 
-        protected virtual async Task<(int, int)> GetDimensionsAsync(IOEmbedMedia content, CancellationToken cancellationToken)
+        protected virtual async Task<(int, int)> GetDimensions(IOEmbedMedia content)
         {
             if (content.Width.HasValue && content.Height.HasValue)
             {
                 return (content.Width.Value, content.Height.Value);
             }
 
-            var isImage = content is IContentImage;
             var isVideo = content is IContentVideo;
-
-            var fileInfo = await content.BinaryData.AsFileInfoAsync();
-
-            if (!fileInfo.Exists || string.IsNullOrEmpty(fileInfo.PhysicalPath))
+            if (!isVideo)
             {
                 return (default, default);
             }
 
-            var tag = File.Create(fileInfo.PhysicalPath);
-
-            if (isImage)
+            var contentStream = await TryGetContentStream(content);
+            if (contentStream is null)
             {
-                return (tag.Properties.PhotoWidth, tag.Properties.PhotoHeight);
+                return (default, default);
             }
 
-            if (isVideo)
+            var extension = Path.GetExtension(content.Name);
+            var parser = GetVideoParser(extension);
+            if (parser is null)
             {
-                return (tag.Properties.VideoWidth, tag.Properties.VideoHeight);
+                return (default, default);
             }
 
-            return (default, default);
+            try
+            {
+                var dimensions = parser.Parse(contentStream);
+                if (dimensions is null)
+                {
+                    return (default, default);
+                }
+
+                return (dimensions.Width, dimensions.Height);
+            }
+            catch (Exception)
+            {
+                contentStream.Dispose();
+
+                return (default, default);
+            }
+        }
+
+        protected virtual IStreamParser<VideoMeta>? GetVideoParser(string extension)
+        {
+            if (extension.Equals(".mp4", StringComparison.OrdinalIgnoreCase))
+                return new Mp4MetadataParser();
+
+            if (extension.Equals(".webm", StringComparison.OrdinalIgnoreCase))
+                return new WebMMetadataParser();
+
+            return null;
+        }
+        
+        protected virtual Task<Stream?> TryGetContentStream(IOEmbedMedia content)
+        {
+            try
+            {
+                var stream = content?.BinaryData?.OpenRead();
+                return Task.FromResult(stream);
+            }
+            catch (IOException)
+            {
+                return Task.FromResult<Stream?>(null);
+            }
         }
     }
 }

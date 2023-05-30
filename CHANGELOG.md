@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0]
+
+- Removed TagLib dependency
+- Added stream based parsing of video dimensions
+
 ## [2.0.3]
 
 - Added playsinline attribute to video tag
@@ -40,7 +45,6 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - Fixed conflict in package naming
-
 
 ## [1.0.0]
 
