@@ -81,8 +81,8 @@ public sealed class WebMMetadataParser : IStreamParser<VideoMeta>
 
         return new VideoMeta
         {
-            Width = width.HasValue ? (int)width.Value : default,
-            Height = height.HasValue ? (int)height.Value : default,            
+            Width = (int)width.Value,
+            Height = (int)height.Value,
         };
     }
 
