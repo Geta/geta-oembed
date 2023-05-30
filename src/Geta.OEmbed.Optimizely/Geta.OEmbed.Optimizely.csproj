@@ -19,10 +19,6 @@
 		<RepositoryUrl>https://github.com/Geta/geta-oembed</RepositoryUrl>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="TagLibSharp" Version="2.2.0" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="EPiServer.CMS.UI.Core" Version="[12.15.0, 13.0.0)" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
@@ -32,6 +28,9 @@
   <ItemGroup>
 		<ProjectReference Include="..\Geta.OEmbed.AspNetCore.Mvc\Geta.OEmbed.AspNetCore.Mvc.csproj" />
 		<ProjectReference Include="..\Geta.OEmbed.Client\Geta.OEmbed.Client.csproj" />
+		<ProjectReference Include="..\Geta.VideoTools.Common\Geta.VideoTools.Common.csproj" />
+		<ProjectReference Include="..\Geta.VideoTools.Mp4\Geta.VideoTools.Mp4.csproj" />
+		<ProjectReference Include="..\Geta.VideoTools.WebM\Geta.VideoTools.WebM.csproj" />
   </ItemGroup>
 	
 	<ImportGroup>

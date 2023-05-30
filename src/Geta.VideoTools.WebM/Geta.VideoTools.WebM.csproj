@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <PackageId>Geta.VideoTools.WebM</PackageId>
+    <Title>Geta VideoTools WebM</Title>
+    <Authors>Geta Digital</Authors>
+    <Company>Geta Digital</Company>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageIconUrl>https://cdn.geta.no/opensource/icons/Geta-logo-3.png</PackageIconUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>Tooling for reading webm video files.</Description>
+    <PackageTags>Geta Video</PackageTags>
+    <RepositoryType>Git</RepositoryType>
+    <RepositoryUrl>https://github.com/Geta/geta-oembed</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Geta.VideoTools.Common\Geta.VideoTools.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\resources\icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>

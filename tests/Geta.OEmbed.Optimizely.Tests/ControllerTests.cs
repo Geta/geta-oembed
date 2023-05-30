@@ -142,10 +142,18 @@ namespace Geta.OEmbed.Optimizely.Tests
 
         private static MockHttpMessageHandler GetHttpMessageHandler(string urlGlob, Action<MockedRequest> action)
         {
-            var mockHttp = new MockHttpMessageHandler();
-            var mockRequest = mockHttp.When(urlGlob);
+            return GetHttpMessageHandler((urlGlob, action));
+        }
 
-            action(mockRequest);
+        private static MockHttpMessageHandler GetHttpMessageHandler(params (string, Action<MockedRequest>)[] data)
+        {
+            var mockHttp = new MockHttpMessageHandler();
+
+            foreach (var (glob, action) in data)
+            {
+                var mockRequest = mockHttp.When(glob);
+                action(mockRequest);
+            }
 
             return mockHttp;
         }
