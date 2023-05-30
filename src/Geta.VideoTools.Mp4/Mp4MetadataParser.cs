@@ -129,18 +129,19 @@ public sealed class Mp4MetadataParser : IStreamParser<VideoMeta>
         var stream = reader.BaseStream;
         var startPosition = stream.Position;
 
-        var version = reader.ReadByte();
-        var flags = reader.ReadBytes(3); // TODO: Read flags;
-        var creationTime = reader.ReadUInt32();
-        var modificationTime = reader.ReadUInt32();
-        var trackId = reader.ReadUInt32();
-        var reservedFirst = reader.ReadUInt32();
-        var duration = reader.ReadUInt32();
-        var reservedSecond = reader.ReadUInt64();
-        var layer = reader.ReadUInt16();
-        var alternateGroup = reader.ReadUInt16();
-        var volume = reader.ReadUInt16();
-        var matrixStructure = reader.ReadBytes(36);
+        _ = reader.ReadByte(); // Version
+        _ = reader.ReadBytes(3); // Flags
+        _ = reader.ReadUInt32(); // Creation time
+        _ = reader.ReadUInt32(); // Modification time
+        _ = reader.ReadUInt32(); // TrackId
+        _ = reader.ReadUInt32(); // Reserved
+        _ = reader.ReadUInt32(); // Duration
+        _ = reader.ReadUInt64(); // Reserved
+        _ = reader.ReadUInt16(); // Layer
+        _ = reader.ReadUInt16(); // Alternate group
+        _ = reader.ReadUInt16(); // Volume
+        _ = reader.ReadBytes(36); // Matrix structure
+
         var trackWidth = reader.ReadUInt32();
         var trackHeight = reader.ReadUInt32();
 
@@ -152,8 +153,7 @@ public sealed class Mp4MetadataParser : IStreamParser<VideoMeta>
 
         if (trackWidth == default && trackHeight == default)
             return null;
-
-        //TODO: Make sensible return format to merge video and audio data.
+        
         return new VideoMeta
         {
             Width = (int)trackWidth,

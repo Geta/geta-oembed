@@ -31,9 +31,9 @@ public sealed class EbmlElement
     public bool IsEmpty => !Identifier.IsValidIdentifier && Size == 0 && Type == EbmlElementType.None;
     public bool HasInvalidIdentifier => !Identifier.IsValidIdentifier;
 
-    public long Remaining;
+    public long Remaining { get; set; }
 
-    public EbmlElementType Type;
+    public EbmlElementType Type { get; set; }
 
     public EbmlElement(VInt identifier, long sizeValue, EbmlElementType type)
     {

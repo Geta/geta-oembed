@@ -114,12 +114,10 @@ public sealed class SeekableStream : Stream
         base.Dispose(disposing);
     }
 
-    private int RequireFromBase(int requiredBytes)
+    private void RequireFromBase(int requiredBytes)
     {
         if (requiredBytes <= 0)
-            return 0;
-
-        var readTotal = 0;
+            return;
 
         do
         {
@@ -129,11 +127,8 @@ public sealed class SeekableStream : Stream
             Buffer.BlockCopy(_buffer, 0, _cache, _position, read);
 
             requiredBytes -= requestBytes;
-            readTotal += read;
         }
         while (requiredBytes > 0);
-
-        return readTotal;
     }
 
     public static Stream Ensure(Stream stream)

@@ -19,6 +19,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * */
 
+using System.Runtime.Serialization;
+
 namespace Geta.VideoTools.WebM;
 
 /// <summary>
@@ -37,6 +39,10 @@ public sealed class EbmlDataFormatException : IOException
 
     public EbmlDataFormatException(string message, Exception cause)
         : base(message, cause)
+    {
+    }
+
+    public EbmlDataFormatException(SerializationInfo info, StreamingContext context) : base(info, context)
     {
     }
 }

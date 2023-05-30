@@ -3,7 +3,7 @@
 
 namespace Geta.VideoTools.WebM;
 
-internal class Constants
+internal static class Constants
 {
     public static readonly HashSet<string> DocTypeDesignations = new()
     {

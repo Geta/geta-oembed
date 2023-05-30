@@ -4,7 +4,7 @@
 namespace Geta.VideoTools.Mp4;
 
 [Flags]
-public enum Mp4TrackFlags
+public enum Mp4Track
 {
     None = 0x0000,
     Enabled = 0x0001,
