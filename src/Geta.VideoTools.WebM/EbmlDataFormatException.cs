@@ -26,6 +26,7 @@ namespace Geta.VideoTools.WebM;
 /// <summary>
 /// Thrown to indicate the EBML data format violation.
 /// </summary>
+[Serializable]
 public sealed class EbmlDataFormatException : IOException
 {
     public EbmlDataFormatException()
