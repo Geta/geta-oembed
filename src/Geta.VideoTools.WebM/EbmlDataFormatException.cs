@@ -42,7 +42,7 @@ public sealed class EbmlDataFormatException : IOException
     {
     }
 
-    public EbmlDataFormatException(SerializationInfo info, StreamingContext context) : base(info, context)
+    private EbmlDataFormatException(SerializationInfo info, StreamingContext context) : base(info, context)
     {
     }
 }
