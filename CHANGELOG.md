@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.2]
+
+### Fixed
+
+- Added additional symbols for embedded ID filter.
+
 ## [2.1.1]
 
 ### Fixed
