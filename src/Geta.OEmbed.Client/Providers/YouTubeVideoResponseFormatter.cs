@@ -10,7 +10,7 @@ namespace Geta.OEmbed.Client.Providers
     public class YouTubeVideoResponseFormatter : IProviderResponseFormatter
     {
         private static readonly Regex SrcFilter = new("src=\"([a-z-0-9-_?=/:.]{1,})\"", RegexOptions.IgnoreCase | RegexOptions.Compiled, TimeSpan.FromSeconds(1));
-        private static readonly Regex IdFilter = new("/embed/([a-z0-9]+)", RegexOptions.IgnoreCase | RegexOptions.Compiled, TimeSpan.FromSeconds(1));
+        private static readonly Regex IdFilter = new("/embed/([a-z0-9-_]+)", RegexOptions.IgnoreCase | RegexOptions.Compiled, TimeSpan.FromSeconds(1));
 
         public virtual bool CanFormat(IOEmbedProvider oEmbedProvider, OEmbedResponse oEmbedResponse)
         {
