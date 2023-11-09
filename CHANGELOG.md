@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [2.2.0]
+## [2.2.1]
 
 - Moved UI files to separate project/package
 
