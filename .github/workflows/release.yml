@@ -31,6 +31,7 @@ jobs:
           dotnet nuget push Geta.OEmbed.Client.${{env.VERSION}}.nupkg --source https://nuget.pkg.github.com/Geta/index.json --api-key ${{env.GITHUB_TOKEN}}
           dotnet nuget push Geta.OEmbed.AspNetCore.Mvc.${{env.VERSION}}.nupkg --source https://nuget.pkg.github.com/Geta/index.json --api-key ${{env.GITHUB_TOKEN}}
           dotnet nuget push Geta.OEmbed.Optimizely.${{env.VERSION}}.nupkg --source https://nuget.pkg.github.com/Geta/index.json --api-key ${{env.GITHUB_TOKEN}}
+          dotnet nuget push Geta.OEmbed.Optimizely.UI.${{env.VERSION}}.nupkg --source https://nuget.pkg.github.com/Geta/index.json --api-key ${{env.GITHUB_TOKEN}}
           dotnet nuget push Geta.OEmbed.Optimizely.ContentDeliveryApi.${{env.VERSION}}.nupkg --source https://nuget.pkg.github.com/Geta/index.json --api-key ${{env.GITHUB_TOKEN}}
           dotnet nuget push Geta.VideoTools.Common.${{env.VERSION}}.nupkg --source https://nuget.pkg.github.com/Geta/index.json --api-key ${{env.GITHUB_TOKEN}}
           dotnet nuget push Geta.VideoTools.Mp4.${{env.VERSION}}.nupkg --source https://nuget.pkg.github.com/Geta/index.json --api-key ${{env.GITHUB_TOKEN}}
