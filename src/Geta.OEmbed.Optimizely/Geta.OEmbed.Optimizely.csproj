@@ -24,7 +24,7 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
 	</ItemGroup>
-	
+
   <ItemGroup>
 		<ProjectReference Include="..\Geta.OEmbed.AspNetCore.Mvc\Geta.OEmbed.AspNetCore.Mvc.csproj" />
 		<ProjectReference Include="..\Geta.OEmbed.Client\Geta.OEmbed.Client.csproj" />
@@ -32,10 +32,6 @@
 		<ProjectReference Include="..\Geta.VideoTools.Mp4\Geta.VideoTools.Mp4.csproj" />
 		<ProjectReference Include="..\Geta.VideoTools.WebM\Geta.VideoTools.WebM.csproj" />
   </ItemGroup>
-	
-	<ImportGroup>
-		<Import Project="$(SolutionDir)\src\pack.proj" Condition="Exists('$(SolutionDir)\src\pack.proj')" />
-	</ImportGroup>
 
 	<ItemGroup>
 		<InternalsVisibleTo Include="$(AssemblyName).Tests" />

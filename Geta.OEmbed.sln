@@ -50,6 +50,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.VideoTools.Mp4", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.VideoTools.WebM", "src\Geta.VideoTools.WebM\Geta.VideoTools.WebM.csproj", "{7C293407-095E-4696-A394-DBF5C8ACD710}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geta.OEmbed.Optimizely.UI", "src\Geta.OEmbed.Optimizely.UI\Geta.OEmbed.Optimizely.UI.csproj", "{55E639C5-6ECD-46AA-BDAF-2D5E5442BCEF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -108,6 +110,10 @@ Global
 		{7C293407-095E-4696-A394-DBF5C8ACD710}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C293407-095E-4696-A394-DBF5C8ACD710}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C293407-095E-4696-A394-DBF5C8ACD710}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55E639C5-6ECD-46AA-BDAF-2D5E5442BCEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55E639C5-6ECD-46AA-BDAF-2D5E5442BCEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55E639C5-6ECD-46AA-BDAF-2D5E5442BCEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55E639C5-6ECD-46AA-BDAF-2D5E5442BCEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
