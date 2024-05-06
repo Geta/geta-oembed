@@ -16,6 +16,8 @@ namespace Geta.OEmbed.Client.DependencyInjection
             if (configure is not null)
                 configure(configuration);
 
+            services.AddLogging();
+
             services.TryAddSingleton(configuration);
             services.TryAddEnumerable(new ServiceDescriptor(typeof(IProviderUrlBuilder), typeof(DefaultProviderUrlBuilder), ServiceLifetime.Singleton));
             services.TryAddEnumerable(new ServiceDescriptor(typeof(IProviderResponseFormatter), typeof(YouTubeVideoResponseFormatter), ServiceLifetime.Singleton));

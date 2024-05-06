@@ -44,7 +44,7 @@ public sealed class Mp4MetadataParser : IStreamParser<VideoMeta>
         {
             reader.Dispose();
         }
-    }    
+    }
 
     private static BinaryReader GetBinaryReader(Stream stream)
     {
@@ -153,7 +153,7 @@ public sealed class Mp4MetadataParser : IStreamParser<VideoMeta>
 
         if (trackWidth == default && trackHeight == default)
             return null;
-        
+
         return new VideoMeta
         {
             Width = (int)trackWidth,

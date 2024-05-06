@@ -10,21 +10,26 @@ using Geta.VideoTools.Common;
 using Geta.VideoTools.Common.Models;
 using Geta.VideoTools.Mp4;
 using Geta.VideoTools.WebM;
+using Microsoft.Extensions.Logging;
 
 namespace Geta.OEmbed.Optimizely.Handlers
 {
     public class OptimizelyOEmbedHandler : IOptimizelyOEmbedHandler
     {
         private readonly IUrlResolver _urlResolver;
+        private readonly ILogger<OptimizelyOEmbedHandler> _logger;
 
-        public OptimizelyOEmbedHandler(IUrlResolver urlResolver)
+        public OptimizelyOEmbedHandler(IUrlResolver urlResolver, ILogger<OptimizelyOEmbedHandler> logger)
         {
             _urlResolver = urlResolver;
+            _logger = logger;
         }
 
         public virtual async Task<OEmbedResponse?> HandleAsync(OEmbedRequest request, CancellationToken cancellationToken)
         {
-            if (_urlResolver.Route(new UrlBuilder(request.Url)) is not IOEmbedMedia content)
+            var routedContent = _urlResolver.Route(new UrlBuilder(request.Url));
+
+            if (routedContent is not IOEmbedMedia content)
             {
                 return null;
             }
@@ -114,7 +119,7 @@ namespace Geta.OEmbed.Optimizely.Handlers
                 return (default, default);
             }
 
-            var contentStream = await TryGetContentStream(content);
+            using var contentStream = await TryGetContentStream(content);
             if (contentStream is null)
             {
                 return (default, default);
@@ -137,9 +142,9 @@ namespace Geta.OEmbed.Optimizely.Handlers
 
                 return (dimensions.Width, dimensions.Height);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                contentStream.Dispose();
+                _logger.LogError(ex, "Error parsing video dimensions: {Message}", ex.Message);
 
                 return (default, default);
             }
@@ -155,7 +160,7 @@ namespace Geta.OEmbed.Optimizely.Handlers
 
             return null;
         }
-        
+
         protected virtual Task<Stream?> TryGetContentStream(IOEmbedMedia content)
         {
             try
