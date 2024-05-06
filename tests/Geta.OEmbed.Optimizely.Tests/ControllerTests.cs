@@ -1,7 +1,6 @@
 // Copyright (c) Geta Digital. All rights reserved.
 // Licensed under Apache-2.0. See the LICENSE file in the project root for more information
 
-using EPiServer.Web;
 using EPiServer.Web.Routing;
 using Geta.OEmbed.AspNetCore.Mvc;
 using Geta.OEmbed.Client;
@@ -13,12 +12,14 @@ using Geta.OEmbed.Optimizely.Tests.Memory;
 using Geta.OEmbed.Tests.Common.Factories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using RichardSzalay.MockHttp;
 
 namespace Geta.OEmbed.Optimizely.Tests
 {
     public class ControllerTests : IDisposable
-    {      
+    {
         private readonly ServiceProvider _serviceProvider;
         private readonly MemoryUrlResolver _memoryUrlResolver;
 
@@ -42,6 +43,7 @@ namespace Geta.OEmbed.Optimizely.Tests
             serviceCollection.AddSingleton<IOEmbedService>(embedService);
             serviceCollection.AddSingleton<IUrlResolver>(_memoryUrlResolver);
             serviceCollection.AddSingleton<IOptimizelyOEmbedHandler, OptimizelyOEmbedHandler>();
+            serviceCollection.AddSingleton(typeof(ILogger<>), typeof(NullLogger<>));
 
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
@@ -90,7 +92,7 @@ namespace Geta.OEmbed.Optimizely.Tests
             {
                 Name = "test.jpg",
                 Width = 200,
-                Height = 150                
+                Height = 150
             };
 
             _memoryUrlResolver.Clear();
